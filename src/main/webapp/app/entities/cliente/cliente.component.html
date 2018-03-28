@@ -40,8 +40,8 @@
                 <td><a [routerLink]="['../cliente', cliente.id ]">{{cliente.id}}</a></td>
                 <td>{{cliente.telefone}}</td>
                 <td>
-                    <div *ngIf="cliente.tagId">
-                        <a [routerLink]="['../tag', cliente.tagId  ]" >{{cliente.tagId}}</a>
+                    <div *ngIf="cliente.tagDTO.nome">
+                        <a [routerLink]="['../tag', cliente.tagDTO.nome  ]" >{{cliente.tagDTO.nome}}</a>
                     </div>
                 </td>
                 <td class="text-right">

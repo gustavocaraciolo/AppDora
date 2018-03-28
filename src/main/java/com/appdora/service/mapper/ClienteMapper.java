@@ -15,9 +15,9 @@ public interface ClienteMapper extends EntityMapper<ClienteDTO, Cliente> {
     @Mapping(source = "tag", target = "tagDTO")
     ClienteDTO toDto(Cliente cliente);
 
-    @Mapping(source = "userDTO", target = "user")
+    @Mapping(source = "userId", target = "user")
     @Mapping(target = "checkout", ignore = true)
-    @Mapping(source = "tagDTO", target = "tag")
+    @Mapping(source = "tagId", target = "tag")
     Cliente toEntity(ClienteDTO clienteDTO);
 
     default Cliente fromId(Long id) {
