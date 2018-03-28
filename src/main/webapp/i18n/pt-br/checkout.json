@@ -1,0 +1,27 @@
+
+{
+    "appDoraApp": {
+        "checkout" : {
+            "home": {
+                "title": "Checkouts",
+                "createLabel": "Criar novo Checkout",
+                "createOrEditLabel": "Criar ou editar Checkout",
+                "search": "Pesquisar por Checkout"
+            },
+            "created": "Um novo Checkout foi criado com o identificador {{ param }}",
+            "updated": "Um Checkout foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Checkout foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Checkout {{ id }}?"
+            },
+            "detail": {
+                "title": "Checkout"
+            },
+            "dataHora": "Data Hora",
+            "quantidade": "Quantidade",
+            "desconto": "Desconto",
+            "cliente": "Cliente",
+            "produto": "Produto"
+        }
+    }
+}

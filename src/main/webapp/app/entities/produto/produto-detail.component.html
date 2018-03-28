@@ -1,0 +1,40 @@
+
+<div *ngIf="produto">
+    <h2><span jhiTranslate="appDoraApp.produto.detail.title">Produto</span> {{produto.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="appDoraApp.produto.nome">Nome</span></dt>
+        <dd>
+            <span>{{produto.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.produto.quantidade">Quantidade</span></dt>
+        <dd>
+            <span>{{produto.quantidade}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.produto.preco">Preco</span></dt>
+        <dd>
+            <span>{{produto.preco}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.produto.categoria">Categoria</span></dt>
+        <dd>
+            <div *ngIf="produto.categoriaId">
+                <a [routerLink]="['/categoria', produto.categoriaId]">{{produto.categoriaId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'produto/'+ produto.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

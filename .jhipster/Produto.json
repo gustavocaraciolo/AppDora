@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "categoria",
+            "otherEntityName": "categoria",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "produto"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "checkout",
+            "otherEntityName": "checkout",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "produto"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "quantidade",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "preco",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180328124230",
+    "entityTableName": "produto",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

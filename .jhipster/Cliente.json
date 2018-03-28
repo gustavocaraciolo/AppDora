@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "cliente"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "checkout",
+            "otherEntityName": "checkout",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "cliente"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "tag",
+            "otherEntityName": "tag",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "telefone",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180328124232",
+    "entityTableName": "cliente",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

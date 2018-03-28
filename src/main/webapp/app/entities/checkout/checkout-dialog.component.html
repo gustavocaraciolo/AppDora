@@ -1,0 +1,65 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCheckoutLabel" jhiTranslate="appDoraApp.checkout.home.createOrEditLabel">Create or edit a Checkout</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!checkout.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="checkout.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.dataHora" for="field_dataHora">Data Hora</label>
+            <div class="d-flex">
+                <input id="field_dataHora" type="datetime-local" class="form-control" name="dataHora" [(ngModel)]="checkout.dataHora"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.dataHora?.dirty && editForm.controls.dataHora?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dataHora?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dataHora?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.quantidade" for="field_quantidade">Quantidade</label>
+            <input type="number" class="form-control" name="quantidade" id="field_quantidade"
+                [(ngModel)]="checkout.quantidade" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.desconto" for="field_desconto">Desconto</label>
+            <input type="number" class="form-control" name="desconto" id="field_desconto"
+                [(ngModel)]="checkout.desconto" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.cliente" for="field_cliente">Cliente</label>
+            <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="checkout.clienteId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="clienteOption.id" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="appDoraApp.checkout.produto" for="field_produto">Produto</label>
+            <select class="form-control" id="field_produto" multiple name="produto" [(ngModel)]="checkout.produtos">
+                <option [ngValue]="getSelected(checkout.produtos, produtoOption)" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+
+<div *ngIf="checkout">
+    <h2><span jhiTranslate="appDoraApp.checkout.detail.title">Checkout</span> {{checkout.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="appDoraApp.checkout.dataHora">Data Hora</span></dt>
+        <dd>
+            <span>{{checkout.dataHora | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.checkout.quantidade">Quantidade</span></dt>
+        <dd>
+            <span>{{checkout.quantidade}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.checkout.desconto">Desconto</span></dt>
+        <dd>
+            <span>{{checkout.desconto}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.checkout.cliente">Cliente</span></dt>
+        <dd>
+            <div *ngIf="checkout.clienteId">
+                <a [routerLink]="['/cliente', checkout.clienteId]">{{checkout.clienteId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.checkout.produto">Produto</span></dt>
+        <dd>
+            <span *ngFor="let produto of checkout.produtos; let last = last">
+                <a [routerLink]="['/produto', produto?.id ]">{{produto.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'checkout/'+ checkout.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
