@@ -31,7 +31,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="telefone"><span jhiTranslate="appDoraApp.cliente.telefone">Telefone</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="userId"><span jhiTranslate="appDoraApp.cliente.user">User</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="tagId"><span jhiTranslate="appDoraApp.cliente.tag">Tag</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -40,9 +39,6 @@
             <tr *ngFor="let cliente of clientes ;trackBy: trackId">
                 <td><a [routerLink]="['../cliente', cliente.id ]">{{cliente.id}}</a></td>
                 <td>{{cliente.telefone}}</td>
-                <td>
-                    {{cliente.userId}}
-                </td>
                 <td>
                     <div *ngIf="cliente.tagId">
                         <a [routerLink]="['../tag', cliente.tagId  ]" >{{cliente.tagId}}</a>
