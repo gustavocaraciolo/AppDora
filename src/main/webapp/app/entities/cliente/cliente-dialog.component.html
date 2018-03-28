@@ -42,8 +42,8 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.cliente.telefone" for="field_telefone">Telefone</label>
-            <input type="text" class="form-control" name="telefone" id="field_telefone"
-                [(ngModel)]="cliente.telefone" />
+            <input type="text" class="form-control" name="telefone" id="field_telefone" [formControl]='formControlInput' [textMask]="{mask: mask}"
+                   [(ngModel)]="cliente.telefone" />
         </div>
 
         <div class="form-group">
