@@ -9,6 +9,7 @@ import com.appdora.repository.UserRepository;
 import com.appdora.service.ClienteService;
 import com.appdora.repository.search.ClienteSearchRepository;
 import com.appdora.service.MailService;
+import com.appdora.service.UserService;
 import com.appdora.service.dto.ClienteDTO;
 import com.appdora.service.mapper.ClienteMapper;
 import com.appdora.web.rest.errors.ExceptionTranslator;
@@ -76,13 +77,15 @@ public class ClienteResourceIntTest {
 
     private Cliente cliente;
 
+    private UserService userService;
+
     private UserRepository userRepository;
 
     private MailService mailService;
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ClienteResource clienteResource = new ClienteResource(clienteService, userRepository, mailService);
+        final ClienteResource clienteResource = new ClienteResource(clienteService, userRepository,  userService, mailService);
         this.restClienteMockMvc = MockMvcBuilders.standaloneSetup(clienteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -1,8 +1,13 @@
 package com.appdora.web.rest;
 
+import com.appdora.domain.User;
 import com.appdora.repository.UserRepository;
 import com.appdora.service.MailService;
+import com.appdora.service.UserService;
+import com.appdora.service.dto.UserDTO;
+import com.appdora.service.mapper.ClienteMapper;
 import com.appdora.web.rest.errors.EmailAlreadyUsedException;
+import com.appdora.web.rest.errors.LoginAlreadyUsedException;
 import com.codahale.metrics.annotation.Timed;
 import com.appdora.service.ClienteService;
 import com.appdora.web.rest.errors.BadRequestAlertException;
@@ -42,11 +47,16 @@ public class ClienteResource {
 
     private final UserRepository userRepository;
 
+    private final UserService userService;
+
+    //private final ClienteMapper clienteMapper;
+
     private final MailService mailService;
 
-    public ClienteResource(ClienteService clienteService, UserRepository userRepository, MailService mailService) {
+    public ClienteResource(ClienteService clienteService, UserRepository userRepository, UserService userService, MailService mailService) {
         this.clienteService = clienteService;
         this.userRepository = userRepository;
+        this.userService = userService;
         this.mailService = mailService;
     }
 
@@ -66,6 +76,7 @@ public class ClienteResource {
         } else if (userRepository.findOneByEmailIgnoreCase(clienteDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
         } else {
+            clienteService.saveUser(clienteDTO);
             ClienteDTO result = clienteService.save(clienteDTO);
             return ResponseEntity.created(new URI("/api/clientes/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -89,6 +100,18 @@ public class ClienteResource {
         if (clienteDTO.getId() == null) {
             return createCliente(clienteDTO);
         }
+
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(clienteDTO.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getId().equals(clienteDTO.getUserId()))) {
+            throw new EmailAlreadyUsedException();
+        }
+
+        clienteDTO.getUserDTO().setFirstName(clienteDTO.getName());
+        clienteDTO.getUserDTO().setLastName(clienteDTO.getName());
+        clienteDTO.getUserDTO().setEmail(clienteDTO.getEmail());
+        clienteDTO.getUserDTO().setLogin(clienteDTO.getEmail());
+        Optional<UserDTO> updatedUser = userService.updateUser(clienteDTO.getUserDTO());
+
         ClienteDTO result = clienteService.save(clienteDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, clienteDTO.getId().toString()))

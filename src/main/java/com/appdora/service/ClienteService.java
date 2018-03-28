@@ -1,5 +1,6 @@
 package com.appdora.service;
 
+import com.appdora.domain.User;
 import com.appdora.service.dto.ClienteDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,8 @@ public interface ClienteService {
      * @return the persisted entity
      */
     ClienteDTO save(ClienteDTO clienteDTO);
+
+    User saveUser(ClienteDTO clienteDTO);
 
     /**
      * Get all the clientes.
@@ -51,7 +54,7 @@ public interface ClienteService {
      * Search for the cliente corresponding to the query.
      *
      * @param query the query of the search
-     * 
+     *
      * @param pageable the pagination information
      * @return the list of entities
      */

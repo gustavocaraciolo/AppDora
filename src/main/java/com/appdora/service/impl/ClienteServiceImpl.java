@@ -67,8 +67,6 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteDTO save(ClienteDTO clienteDTO) {
         log.debug("Request to save Cliente : {}", clienteDTO);
-        User user = saveUser(clienteDTO);
-        clienteDTO.setUserId(user.getId());
         Cliente cliente = clienteMapper.toEntity(clienteDTO);
         cliente = clienteRepository.save(cliente);
         ClienteDTO result = clienteMapper.toDto(cliente);
@@ -76,7 +74,7 @@ public class ClienteServiceImpl implements ClienteService {
         return result;
     }
 
-    private User saveUser(ClienteDTO clienteDTO) {
+    public User saveUser(ClienteDTO clienteDTO) {
         User user = new User();
         Set<Authority> authorities = new HashSet<>();
         Authority authority = new Authority();
@@ -100,6 +98,7 @@ public class ClienteServiceImpl implements ClienteService {
         user.setResetDate(Instant.now());
         user.setActivated(true);
         user = userRepository.saveAndFlush(user);
+        clienteDTO.setUserId(user.getId());
         return user;
     }
 
