@@ -45,7 +45,7 @@
                 <td>{{cliente.telefone}}</td>
                 <td>
                     <div *ngIf="cliente.tagDTO.nome">
-                        <a [routerLink]="['../tag', cliente.tagDTO.nome  ]" >{{cliente.tagDTO.nome}}</a>
+                        <a [routerLink]="['../tag', cliente.tagId  ]" >{{cliente.tagDTO.nome}}</a>
                     </div>
                 </td>
                 <td class="text-right">
