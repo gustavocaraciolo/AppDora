@@ -1,0 +1,42 @@
+entity Checkout {
+	dataHora ZonedDateTime required,
+    quantidade Integer,
+    desconto BigDecimal
+}
+
+entity Produto{
+    nome String required,
+    quantidade Integer,
+    preco BigDecimal
+}
+
+entity Categoria{
+    nome String required
+}
+
+entity Cliente{
+    telefone String
+}
+
+entity Tag {
+    nome String required
+}
+
+relationship OneToMany {
+    Tag{cliente} to Cliente{tag}
+}
+
+relationship ManyToMany {
+	Checkout{produto} to Produto{checkout}
+}
+
+relationship OneToOne {
+    Produto{categoria} to Categoria{produto},
+    Cliente{user required} to User{cliente}
+    Checkout{cliente} to Cliente{checkout} 
+}
+
+
+paginate all with pagination
+dto * with mapstruct
+service all with serviceImpl
