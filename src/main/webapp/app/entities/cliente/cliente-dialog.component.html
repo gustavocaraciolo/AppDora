@@ -20,12 +20,12 @@
         <div class="form-group">
             <label class="form-control-label" for="email" jhiTranslate="global.form.email">Email</label>
             <input type="email" class="form-control" id="email" name="email" #email="ngModel"
-                   [(ngModel)]="cliente.email" minlength=5 maxlength=100 email required>
+                   [(ngModel)]="cliente.email" minlength=5 maxlength=100>
             <div *ngIf="email.dirty && email.invalid">
-                <small class="form-text text-danger" *ngIf="email.errors.required"
+               <!--<small class="form-text text-danger" *ngIf="email.errors.required"
                        jhiTranslate="global.messages.validate.email.required">
                     Your email is required.
-                </small>
+                </small>-->
                 <small class="form-text text-danger" *ngIf="email.errors.invalid"
                        jhiTranslate="global.messages.validate.email.invalid">
                     Your email is invalid.
