@@ -40,12 +40,12 @@
                 <td>{{tag.nome}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
+                        <!--<button type="submit"
                                 [routerLink]="['../tag', tag.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+                        </button>-->
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'tag/'+ tag.id + '/edit'} }]"
                                 replaceUrl="true"
