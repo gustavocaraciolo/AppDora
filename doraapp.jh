@@ -30,8 +30,11 @@ relationship ManyToMany {
 	Checkout{produto} to Produto{checkout}
 }
 
+relationship ManyToOne {
+	Produto{categoria} to Categoria{produto}
+}
+
 relationship OneToOne {
-    Produto{categoria} to Categoria{produto},
     Cliente{user required} to User{cliente}
     Checkout{cliente} to Cliente{checkout} 
 }
