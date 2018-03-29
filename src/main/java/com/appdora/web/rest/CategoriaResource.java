@@ -89,17 +89,11 @@ public class CategoriaResource {
      * GET  /categorias : get all the categorias.
      *
      * @param pageable the pagination information
-     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of categorias in body
      */
     @GetMapping("/categorias")
     @Timed
-    public ResponseEntity<List<CategoriaDTO>> getAllCategorias(Pageable pageable, @RequestParam(required = false) String filter) {
-        if ("produto-is-null".equals(filter)) {
-            log.debug("REST request to get all Categorias where produto is null");
-            return new ResponseEntity<>(categoriaService.findAllWhereProdutoIsNull(),
-                    HttpStatus.OK);
-        }
+    public ResponseEntity<List<CategoriaDTO>> getAllCategorias(Pageable pageable) {
         log.debug("REST request to get a page of Categorias");
         Page<CategoriaDTO> page = categoriaService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categorias");

@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface CategoriaMapper extends EntityMapper<CategoriaDTO, Categoria> {
 
 
-    @Mapping(target = "produto", ignore = true)
+    @Mapping(target = "produtos", ignore = true)
     Categoria toEntity(CategoriaDTO categoriaDTO);
 
     default Categoria fromId(Long id) {

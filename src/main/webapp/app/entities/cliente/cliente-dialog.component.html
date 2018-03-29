@@ -13,50 +13,29 @@
                    [(ngModel)]="cliente.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="appDoraApp.cliente.name" for="field_name">Nome</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                   [(ngModel)]="cliente.name" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="userManagement.email">Email</label>
-            <input type="email" class="form-control" name="email" #emailInput="ngModel"
-                   [(ngModel)]="cliente.email" minlength="5" required maxlength="100" email>
-
-            <div *ngIf="emailInput.dirty && emailInput.invalid">
-                <small class="form-text text-danger"
-                       *ngIf="emailInput.errors.required" jhiTranslate="entity.validation.required">
-                    This field is required.
-                </small>
-
-                <small class="form-text text-danger"
-                       *ngIf="emailInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
-                       translateValues="{max: 100}">
-                    This field cannot be longer than 100 characters.
-                </small>
-
-                <small class="form-text text-danger"
-                       *ngIf="emailInput.errors.minlength" jhiTranslate="entity.validation.minlength"
-                       translateValues="{min: 5}">
-                    This field is required to be at least 5 characters.
-                </small>
-
-                <small class="form-text text-danger"
-                       *ngIf="emailInput.errors.email" jhiTranslate="global.messages.validate.email.invalid">
-                    Your email is invalid.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.cliente.telefone" for="field_telefone">Telefone</label>
-            <input type="text" class="form-control" name="telefone" id="field_telefone" [textMask]="{mask: maskPhone}"
-                   [(ngModel)]="cliente.telefone" />
+            <input type="text" class="form-control" name="telefone" id="field_telefone"
+                [(ngModel)]="cliente.telefone" />
         </div>
 
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.cliente.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="cliente.userId"  required>
+                <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.user?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.cliente.tag" for="field_tag">Tag</label>
             <select class="form-control" id="field_tag" name="tag" [(ngModel)]="cliente.tagId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="tagOption.id" *ngFor="let tagOption of tags; trackBy: trackTagById">{{tagOption.nome}}</option>
+                <option [ngValue]="tagOption.id" *ngFor="let tagOption of tags; trackBy: trackTagById">{{tagOption.id}}</option>
             </select>
         </div>
     </div>

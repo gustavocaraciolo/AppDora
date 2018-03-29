@@ -12,7 +12,6 @@ import { ClienteService } from './cliente.service';
 import { User, UserService } from '../../shared';
 import { Checkout, CheckoutService } from '../checkout';
 import { Tag, TagService } from '../tag';
-import { MASK_PHONE } from '../../app.constants';
 
 @Component({
     selector: 'jhi-cliente-dialog',
@@ -28,8 +27,6 @@ export class ClienteDialogComponent implements OnInit {
     checkouts: Checkout[];
 
     tags: Tag[];
-
-    public maskPhone = MASK_PHONE
 
     constructor(
         public activeModal: NgbActiveModal,

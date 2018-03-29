@@ -1,7 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {FormsModule} from '@angular/forms'
-import { TextMaskModule } from 'angular2-text-mask';
 
 import { AppDoraSharedModule } from '../../shared';
 import {
@@ -26,8 +24,6 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         AppDoraSharedModule,
-        FormsModule,
-        TextMaskModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [

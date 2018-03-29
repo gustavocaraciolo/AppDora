@@ -18,8 +18,6 @@
                 "title": "Cliente"
             },
             "telefone": "Telefone",
-            "name": "Nome",
-            "email": "Email",
             "user": "User",
             "checkout": "Checkout",
             "tag": "Tag"

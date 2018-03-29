@@ -1,31 +1,20 @@
 package com.appdora.service.impl;
 
-import com.appdora.config.Constants;
-import com.appdora.domain.Authority;
-import com.appdora.domain.User;
-import com.appdora.repository.AuthorityRepository;
-import com.appdora.repository.UserRepository;
-import com.appdora.security.AuthoritiesConstants;
 import com.appdora.service.ClienteService;
 import com.appdora.domain.Cliente;
 import com.appdora.repository.ClienteRepository;
 import com.appdora.repository.search.ClienteSearchRepository;
 import com.appdora.service.dto.ClienteDTO;
 import com.appdora.service.mapper.ClienteMapper;
-import com.appdora.service.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -44,18 +33,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteMapper clienteMapper;
 
-    private final UserRepository userRepository;
-
     private final ClienteSearchRepository clienteSearchRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
-    public ClienteServiceImpl(ClienteRepository clienteRepository, ClienteMapper clienteMapper, UserRepository userRepository, ClienteSearchRepository clienteSearchRepository, PasswordEncoder passwordEncoder) {
+    public ClienteServiceImpl(ClienteRepository clienteRepository, ClienteMapper clienteMapper, ClienteSearchRepository clienteSearchRepository) {
         this.clienteRepository = clienteRepository;
         this.clienteMapper = clienteMapper;
-        this.userRepository = userRepository;
         this.clienteSearchRepository = clienteSearchRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -72,34 +55,6 @@ public class ClienteServiceImpl implements ClienteService {
         ClienteDTO result = clienteMapper.toDto(cliente);
         clienteSearchRepository.save(cliente);
         return result;
-    }
-
-    public User saveUser(ClienteDTO clienteDTO) {
-        User user = new User();
-        Set<Authority> authorities = new HashSet<>();
-        Authority authority = new Authority();
-        authority.setName(AuthoritiesConstants.ADMIN);
-        authorities.add(authority);
-
-        user.setLogin(clienteDTO.getEmail());
-        user.setFirstName(clienteDTO.getName());
-        user.setLastName(clienteDTO.getName());
-        user.setEmail(clienteDTO.getEmail());
-        user.setImageUrl("http://facebook.com/keith.donald");
-        user.setAuthorities(authorities);
-        if (user.getLangKey() == null) {
-            user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
-        } else {
-            user.setLangKey(user.getLangKey());
-        }
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
-        user.setPassword(encryptedPassword);
-        user.setResetKey(RandomUtil.generateResetKey());
-        user.setResetDate(Instant.now());
-        user.setActivated(true);
-        user = userRepository.saveAndFlush(user);
-        clienteDTO.setUserId(user.getId());
-        return user;
     }
 
     /**
@@ -121,7 +76,7 @@ public class ClienteServiceImpl implements ClienteService {
      *  get all the clientes where Checkout is null.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) 
     public List<ClienteDTO> findAllWhereCheckoutIsNull() {
         log.debug("Request to get all clientes where Checkout is null");
         return StreamSupport

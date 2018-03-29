@@ -13,10 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -69,21 +65,6 @@ public class CategoriaServiceImpl implements CategoriaService {
         log.debug("Request to get all Categorias");
         return categoriaRepository.findAll(pageable)
             .map(categoriaMapper::toDto);
-    }
-
-
-    /**
-     *  get all the categorias where Produto is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<CategoriaDTO> findAllWhereProdutoIsNull() {
-        log.debug("Request to get all categorias where Produto is null");
-        return StreamSupport
-            .stream(categoriaRepository.findAll().spliterator(), false)
-            .filter(categoria -> categoria.getProduto() == null)
-            .map(categoriaMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**

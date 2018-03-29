@@ -6,7 +6,6 @@ import com.appdora.repository.ProdutoRepository;
 import com.appdora.repository.search.ProdutoSearchRepository;
 import com.appdora.service.dto.ProdutoDTO;
 import com.appdora.service.mapper.ProdutoMapper;
-import com.appdora.service.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.math.BigDecimal;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -49,7 +46,6 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public ProdutoDTO save(ProdutoDTO produtoDTO) {
         log.debug("Request to save Produto : {}", produtoDTO);
-        produtoDTO.setPreco(RandomUtil.formatMoedaToBigdecimal(produtoDTO.getPreco()));
         Produto produto = produtoMapper.toEntity(produtoDTO);
         produto = produtoRepository.save(produto);
         ProdutoDTO result = produtoMapper.toDto(produto);

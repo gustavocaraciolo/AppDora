@@ -9,7 +9,6 @@ import { AppDoraTestModule } from '../../../test.module';
 import { CategoriaDialogComponent } from '../../../../../../main/webapp/app/entities/categoria/categoria-dialog.component';
 import { CategoriaService } from '../../../../../../main/webapp/app/entities/categoria/categoria.service';
 import { Categoria } from '../../../../../../main/webapp/app/entities/categoria/categoria.model';
-import { ProdutoService } from '../../../../../../main/webapp/app/entities/produto';
 
 describe('Component Tests', () => {
 
@@ -25,7 +24,6 @@ describe('Component Tests', () => {
                 imports: [AppDoraTestModule],
                 declarations: [CategoriaDialogComponent],
                 providers: [
-                    ProdutoService,
                     CategoriaService
                 ]
             })

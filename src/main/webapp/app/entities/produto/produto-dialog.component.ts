@@ -11,7 +11,6 @@ import { ProdutoPopupService } from './produto-popup.service';
 import { ProdutoService } from './produto.service';
 import { Categoria, CategoriaService } from '../categoria';
 import { Checkout, CheckoutService } from '../checkout';
-import { MASK_MOEDA_KWANZA } from '../../app.constants';
 
 @Component({
     selector: 'jhi-produto-dialog',
@@ -26,8 +25,6 @@ export class ProdutoDialogComponent implements OnInit {
 
     checkouts: Checkout[];
 
-    public maskMoeda = MASK_MOEDA_KWANZA
-
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
@@ -40,19 +37,8 @@ export class ProdutoDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.categoriaService
-            .query({filter: 'produto-is-null'})
-            .subscribe((res: HttpResponse<Categoria[]>) => {
-                if (!this.produto.categoriaId) {
-                    this.categorias = res.body;
-                } else {
-                    this.categoriaService
-                        .find(this.produto.categoriaId)
-                        .subscribe((subRes: HttpResponse<Categoria>) => {
-                            this.categorias = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.categoriaService.query()
+            .subscribe((res: HttpResponse<Categoria[]>) => { this.categorias = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.checkoutService.query()
             .subscribe((res: HttpResponse<Checkout[]>) => { this.checkouts = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }

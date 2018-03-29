@@ -1,14 +1,15 @@
 package com.appdora.service.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
 
 /**
  * A DTO for the Cliente entity.
  */
-
 public class ClienteDTO implements Serializable {
 
     private Long id;
@@ -19,78 +20,64 @@ public class ClienteDTO implements Serializable {
 
     private Long tagId;
 
-    private UserDTO userDTO;
-
-    private TagDTO tagDTO;
-
-    private String name;
-
-    private String email;
-
-    public ClienteDTO() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Long getId() {
-        return this.id;
-    }
-
-    public String getTelefone() {
-        return this.telefone;
-    }
-
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public Long getTagId() {
-        return this.tagId;
-    }
-
-    public UserDTO getUserDTO() {
-        return this.userDTO;
-    }
-
-    public TagDTO getTagDTO() {
-        return this.tagDTO;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
+    public Long getTagId() {
+        return tagId;
+    }
+
     public void setTagId(Long tagId) {
         this.tagId = tagId;
     }
 
-    public void setUserDTO(UserDTO userDTO) {
-        this.userDTO = userDTO;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        ClienteDTO clienteDTO = (ClienteDTO) o;
+        if(clienteDTO.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), clienteDTO.getId());
     }
 
-    public void setTagDTO(TagDTO tagDTO) {
-        this.tagDTO = tagDTO;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "ClienteDTO{" +
+            "id=" + getId() +
+            ", telefone='" + getTelefone() + "'" +
+            "}";
     }
 }
