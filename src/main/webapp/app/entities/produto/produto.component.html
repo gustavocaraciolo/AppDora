@@ -44,8 +44,8 @@
                 <td>{{produto.quantidade}}</td>
                 <td>{{produto.preco}}</td>
                 <td>
-                    <div *ngIf="produto.categoriaId">
-                        <a [routerLink]="['../categoria', produto.categoriaId  ]" >{{produto.categoriaId}}</a>
+                    <div *ngIf="produto.categoriaDTO.nome">
+                        <a [routerLink]="['../categoria', produto.categoriaId  ]" >{{produto.categoriaDTO.nome}}</a>
                     </div>
                 </td>
                 <td class="text-right">

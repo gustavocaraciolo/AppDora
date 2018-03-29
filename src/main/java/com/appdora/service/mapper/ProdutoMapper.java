@@ -11,6 +11,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {CategoriaMapper.class})
 public interface ProdutoMapper extends EntityMapper<ProdutoDTO, Produto> {
 
+    @Mapping(source = "categoria", target = "categoriaDTO")
     @Mapping(source = "categoria.id", target = "categoriaId")
     ProdutoDTO toDto(Produto produto);
 
