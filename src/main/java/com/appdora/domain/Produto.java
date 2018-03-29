@@ -39,8 +39,7 @@ public class Produto implements Serializable {
     @Column(name = "preco", precision=10, scale=2)
     private BigDecimal preco;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Categoria categoria;
 
     @ManyToMany(mappedBy = "produtos")

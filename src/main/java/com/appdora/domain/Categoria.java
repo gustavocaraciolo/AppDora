@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -30,9 +32,10 @@ public class Categoria implements Serializable {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @OneToOne(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoria")
     @JsonIgnore
-    private Produto produto;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Produto> produtos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -56,17 +59,29 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public Set<Produto> getProdutos() {
+        return produtos;
     }
 
-    public Categoria produto(Produto produto) {
-        this.produto = produto;
+    public Categoria produtos(Set<Produto> produtos) {
+        this.produtos = produtos;
         return this;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public Categoria addProduto(Produto produto) {
+        this.produtos.add(produto);
+        produto.setCategoria(this);
+        return this;
+    }
+
+    public Categoria removeProduto(Produto produto) {
+        this.produtos.remove(produto);
+        produto.setCategoria(null);
+        return this;
+    }
+
+    public void setProdutos(Set<Produto> produtos) {
+        this.produtos = produtos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

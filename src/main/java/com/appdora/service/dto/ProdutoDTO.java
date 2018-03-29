@@ -1,8 +1,6 @@
 package com.appdora.service.dto;
 
 
-import org.springframework.format.annotation.NumberFormat;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -25,12 +25,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.produto.quantidade" for="field_quantidade">Quantidade</label>
-            <input type="number" class="form-control" name="quantidade" id="field_quantidade"
+            <input type="text" class="form-control" name="quantidade" id="field_quantidade" [textMask]="{mask: maskNumber}"
                 [(ngModel)]="produto.quantidade" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.produto.preco" for="field_preco">Preco</label>
-            <input type="text" class="form-control" name="preco" id="field_preco" [textMask]="{mask: maskMoeda}"
+            <input type="text" class="form-control" maxlength="10" name="preco" id="field_preco" [textMask]="{mask: maskMoeda}"
                 [(ngModel)]="produto.preco" />
         </div>
 

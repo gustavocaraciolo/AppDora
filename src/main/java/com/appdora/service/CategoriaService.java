@@ -3,7 +3,6 @@ package com.appdora.service;
 import com.appdora.service.dto.CategoriaDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import java.util.List;
 
 /**
  * Service Interface for managing Categoria.
@@ -25,12 +24,6 @@ public interface CategoriaService {
      * @return the list of entities
      */
     Page<CategoriaDTO> findAll(Pageable pageable);
-    /**
-     * Get all the CategoriaDTO where Produto is null.
-     *
-     * @return the list of entities
-     */
-    List<CategoriaDTO> findAllWhereProdutoIsNull();
 
     /**
      * Get the "id" categoria.
