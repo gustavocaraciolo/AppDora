@@ -21,8 +21,8 @@
             "name": "Name",
             "email": "Email",
             "user": "User",
-            "checkout": "Checkout",
-            "tag": "Tag"
+            "tag": "Tag",
+            "checkout": "Checkout"
         }
     }
 }

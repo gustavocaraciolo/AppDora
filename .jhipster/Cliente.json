@@ -11,17 +11,16 @@
             "otherEntityRelationshipName": "cliente"
         },
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "checkout",
-            "otherEntityName": "checkout",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "cliente"
-        },
-        {
             "relationshipType": "many-to-one",
             "relationshipName": "tag",
             "otherEntityName": "tag",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "checkout",
+            "otherEntityName": "checkout",
+            "otherEntityRelationshipName": "cliente"
         }
     ],
     "fields": [

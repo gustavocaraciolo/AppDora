@@ -39,8 +39,7 @@ public class Checkout implements Serializable {
     @Column(name = "desconto", precision=10, scale=2)
     private BigDecimal desconto;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Cliente cliente;
 
     @ManyToMany

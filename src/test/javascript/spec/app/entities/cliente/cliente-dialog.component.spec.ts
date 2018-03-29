@@ -10,7 +10,6 @@ import { ClienteDialogComponent } from '../../../../../../main/webapp/app/entiti
 import { ClienteService } from '../../../../../../main/webapp/app/entities/cliente/cliente.service';
 import { Cliente } from '../../../../../../main/webapp/app/entities/cliente/cliente.model';
 import { UserService } from '../../../../../../main/webapp/app/shared';
-import { CheckoutService } from '../../../../../../main/webapp/app/entities/checkout';
 import { TagService } from '../../../../../../main/webapp/app/entities/tag';
 
 describe('Component Tests', () => {
@@ -28,7 +27,6 @@ describe('Component Tests', () => {
                 declarations: [ClienteDialogComponent],
                 providers: [
                     UserService,
-                    CheckoutService,
                     TagService,
                     ClienteService
                 ]

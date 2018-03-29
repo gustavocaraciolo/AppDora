@@ -20,7 +20,7 @@ public interface ClienteMapper extends EntityMapper<ClienteDTO, Cliente> {
     ClienteDTO toDto(Cliente cliente);
 
     @Mapping(source = "userId", target = "user")
-    @Mapping(target = "checkout", ignore = true)
+    @Mapping(target = "checkouts", ignore = true)
     @Mapping(source = "tagId", target = "tag")
     Cliente toEntity(ClienteDTO clienteDTO);
 

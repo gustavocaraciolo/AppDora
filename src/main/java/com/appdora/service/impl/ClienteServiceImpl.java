@@ -126,7 +126,7 @@ public class ClienteServiceImpl implements ClienteService {
         log.debug("Request to get all clientes where Checkout is null");
         return StreamSupport
             .stream(clienteRepository.findAll().spliterator(), false)
-            .filter(cliente -> cliente.getCheckout() == null)
+            .filter(cliente -> cliente.getCheckouts() == null)
             .map(clienteMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

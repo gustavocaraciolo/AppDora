@@ -37,19 +37,8 @@ export class CheckoutDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.clienteService
-            .query({filter: 'checkout-is-null'})
-            .subscribe((res: HttpResponse<Cliente[]>) => {
-                if (!this.checkout.clienteId) {
-                    this.clientes = res.body;
-                } else {
-                    this.clienteService
-                        .find(this.checkout.clienteId)
-                        .subscribe((subRes: HttpResponse<Cliente>) => {
-                            this.clientes = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.clienteService.query()
+            .subscribe((res: HttpResponse<Cliente[]>) => { this.clientes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.produtoService.query()
             .subscribe((res: HttpResponse<Produto[]>) => { this.produtos = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }

@@ -8,6 +8,7 @@ export class Cliente implements BaseEntity {
         public name?: string,
         public email?: string,
         public tagId?: number,
+        public checkouts?: BaseEntity[],
     ) {
     }
 }

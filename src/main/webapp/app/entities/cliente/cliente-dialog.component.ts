@@ -10,7 +10,6 @@ import { Cliente } from './cliente.model';
 import { ClientePopupService } from './cliente-popup.service';
 import { ClienteService } from './cliente.service';
 import { User, UserService } from '../../shared';
-import { Checkout, CheckoutService } from '../checkout';
 import { Tag, TagService } from '../tag';
 import { MASK_PHONE } from '../../app.constants';
 
@@ -25,8 +24,6 @@ export class ClienteDialogComponent implements OnInit {
 
     users: User[];
 
-    checkouts: Checkout[];
-
     tags: Tag[];
 
     public maskPhone = MASK_PHONE
@@ -36,7 +33,6 @@ export class ClienteDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private clienteService: ClienteService,
         private userService: UserService,
-        private checkoutService: CheckoutService,
         private tagService: TagService,
         private eventManager: JhiEventManager
     ) {
@@ -46,8 +42,6 @@ export class ClienteDialogComponent implements OnInit {
         this.isSaving = false;
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.checkoutService.query()
-            .subscribe((res: HttpResponse<Checkout[]>) => { this.checkouts = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.tagService.query()
             .subscribe((res: HttpResponse<Tag[]>) => { this.tags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
@@ -87,10 +81,6 @@ export class ClienteDialogComponent implements OnInit {
     }
 
     trackUserById(index: number, item: User) {
-        return item.id;
-    }
-
-    trackCheckoutById(index: number, item: Checkout) {
         return item.id;
     }
 

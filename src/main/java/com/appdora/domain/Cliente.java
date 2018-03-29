@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -34,12 +36,13 @@ public class Cliente implements Serializable {
     @JoinColumn(unique = true)
     private User user;
 
-    @OneToOne(mappedBy = "cliente")
-    @JsonIgnore
-    private Checkout checkout;
-
     @ManyToOne
     private Tag tag;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Checkout> checkouts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -76,19 +79,6 @@ public class Cliente implements Serializable {
         this.user = user;
     }
 
-    public Checkout getCheckout() {
-        return checkout;
-    }
-
-    public Cliente checkout(Checkout checkout) {
-        this.checkout = checkout;
-        return this;
-    }
-
-    public void setCheckout(Checkout checkout) {
-        this.checkout = checkout;
-    }
-
     public Tag getTag() {
         return tag;
     }
@@ -100,6 +90,31 @@ public class Cliente implements Serializable {
 
     public void setTag(Tag tag) {
         this.tag = tag;
+    }
+
+    public Set<Checkout> getCheckouts() {
+        return checkouts;
+    }
+
+    public Cliente checkouts(Set<Checkout> checkouts) {
+        this.checkouts = checkouts;
+        return this;
+    }
+
+    public Cliente addCheckout(Checkout checkout) {
+        this.checkouts.add(checkout);
+        checkout.setCliente(this);
+        return this;
+    }
+
+    public Cliente removeCheckout(Checkout checkout) {
+        this.checkouts.remove(checkout);
+        checkout.setCliente(null);
+        return this;
+    }
+
+    public void setCheckouts(Set<Checkout> checkouts) {
+        this.checkouts = checkouts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
