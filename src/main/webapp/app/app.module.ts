@@ -39,7 +39,7 @@ import {
         AppDoraHomeModule,
         AppDoraAdminModule,
         AppDoraAccountModule,
-        AppDoraEntityModule,
+        AppDoraEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

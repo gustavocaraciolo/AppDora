@@ -11,6 +11,7 @@ import { ProdutoPopupService } from './produto-popup.service';
 import { ProdutoService } from './produto.service';
 import { Categoria, CategoriaService } from '../categoria';
 import { Checkout, CheckoutService } from '../checkout';
+import { MASK_MOEDA_KWANZA } from '../../app.constants';
 
 @Component({
     selector: 'jhi-produto-dialog',
@@ -24,6 +25,8 @@ export class ProdutoDialogComponent implements OnInit {
     categorias: Categoria[];
 
     checkouts: Checkout[];
+
+    public maskMoeda = MASK_MOEDA_KWANZA
 
     constructor(
         public activeModal: NgbActiveModal,
