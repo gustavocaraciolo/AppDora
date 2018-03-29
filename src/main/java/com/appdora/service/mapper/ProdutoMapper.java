@@ -5,13 +5,17 @@ import com.appdora.service.dto.ProdutoDTO;
 
 import org.mapstruct.*;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 /**
  * Mapper for the entity Produto and its DTO ProdutoDTO.
  */
 @Mapper(componentModel = "spring", uses = {CategoriaMapper.class})
 public interface ProdutoMapper extends EntityMapper<ProdutoDTO, Produto> {
 
-    @Mapping(source = "categoria", target = "categoriaDTO")
+    //@Mapping(source = "categoria", target = "categoriaDTO")
     @Mapping(source = "categoria.id", target = "categoriaId")
     ProdutoDTO toDto(Produto produto);
 

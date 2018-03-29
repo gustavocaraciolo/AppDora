@@ -1,6 +1,8 @@
 package com.appdora.service.dto;
 
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,11 +22,9 @@ public class ProdutoDTO implements Serializable {
 
     private Integer quantidade;
 
-    private BigDecimal preco;
+    private String preco;
 
     private Long categoriaId;
-
-    private CategoriaDTO categoriaDTO;
 
     public Long getId() {
         return id;
@@ -50,11 +50,11 @@ public class ProdutoDTO implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public BigDecimal getPreco() {
+    public String getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
     }
 
@@ -64,14 +64,6 @@ public class ProdutoDTO implements Serializable {
 
     public void setCategoriaId(Long categoriaId) {
         this.categoriaId = categoriaId;
-    }
-
-    public CategoriaDTO getCategoriaDTO() {
-        return categoriaDTO;
-    }
-
-    public void setCategoriaDTO(CategoriaDTO categoriaDTO) {
-        this.categoriaDTO = categoriaDTO;
     }
 
     @Override
