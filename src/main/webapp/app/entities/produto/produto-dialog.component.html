@@ -38,7 +38,7 @@
             <label class="form-control-label" jhiTranslate="appDoraApp.produto.categoria" for="field_categoria">Categoria</label>
             <select class="form-control" id="field_categoria" name="categoria" [(ngModel)]="produto.categoriaId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="categoriaOption.id" *ngFor="let categoriaOption of categorias; trackBy: trackCategoriaById">{{categoriaOption.id}}</option>
+                <option [ngValue]="categoriaOption.id" *ngFor="let categoriaOption of categorias; trackBy: trackCategoriaById">{{categoriaOption.nome}}</option>
             </select>
         </div>
     </div>
