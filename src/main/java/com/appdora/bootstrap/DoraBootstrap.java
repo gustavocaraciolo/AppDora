@@ -56,7 +56,7 @@ public class DoraBootstrap implements ApplicationListener<ContextRefreshedEvent>
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        log.debug("Loading Bootstrap Data");
+        //log.debug("Loading Bootstrap Data");
         loadTag();
         loadCliente();
         loadCategoria();
@@ -68,7 +68,7 @@ public class DoraBootstrap implements ApplicationListener<ContextRefreshedEvent>
         List<CheckoutDTO> checkoutDTOS = new ArrayList<>();
         Set<ProdutoDTO> listProduto = new LinkedHashSet<ProdutoDTO>(produtoMapper.toDto(this.produtos));
         listProduto.add(new ProdutoDTO("Saia Mid", 20, "23", this.categorias.get(0).getId()));
-        checkoutDTOS.add(new CheckoutDTO(2,new BigDecimal("0.01"),this.clientes.get(2).getId(),listProduto));
+        checkoutDTOS.add(new CheckoutDTO(2,"0.01",this.clientes.get(2).getId(),listProduto));
         List<Checkout> checkouts = checkoutMapper.toEntity(checkoutDTOS);
         checkoutRepository.save(checkouts);
         //this.checkouts = checkouts;

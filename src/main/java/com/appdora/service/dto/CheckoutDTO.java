@@ -16,15 +16,15 @@ public class CheckoutDTO implements Serializable {
 
     private Long id;
 
-    private ZonedDateTime dataHora;
-
     private Integer quantidade;
 
-    private BigDecimal desconto;
+    private String desconto;
 
     private Long clienteId;
 
-    public CheckoutDTO(Integer quantidade, BigDecimal desconto, Long clienteId, Set<ProdutoDTO> produtos) {
+    private ClienteDTO clienteDTO;
+
+    public CheckoutDTO(Integer quantidade, String desconto, Long clienteId, Set<ProdutoDTO> produtos) {
         this.quantidade = quantidade;
         this.desconto = desconto;
         this.clienteId = clienteId;
@@ -48,10 +48,6 @@ public class CheckoutDTO implements Serializable {
         return ZonedDateTime.now();
     }
 
-    public void setDataHora(ZonedDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
     public Integer getQuantidade() {
         return quantidade;
     }
@@ -60,11 +56,11 @@ public class CheckoutDTO implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public BigDecimal getDesconto() {
+    public String getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(BigDecimal desconto) {
+    public void setDesconto(String desconto) {
         this.desconto = desconto;
     }
 
@@ -82,6 +78,14 @@ public class CheckoutDTO implements Serializable {
 
     public void setProdutos(Set<ProdutoDTO> produtos) {
         this.produtos = produtos;
+    }
+
+    public ClienteDTO getClienteDTO() {
+        return clienteDTO;
+    }
+
+    public void setClienteDTO(ClienteDTO clienteDTO) {
+        this.clienteDTO = clienteDTO;
     }
 
     @Override

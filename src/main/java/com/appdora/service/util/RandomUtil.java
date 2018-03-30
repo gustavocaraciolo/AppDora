@@ -51,6 +51,6 @@ public final class RandomUtil {
             replacePreco = replacePreco.replace(",", "");
             return replacePreco.substring(0, replacePreco.length() - 2);
         }
-        return null;
+        return "0";
     }
 }

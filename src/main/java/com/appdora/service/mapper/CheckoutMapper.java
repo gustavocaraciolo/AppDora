@@ -11,6 +11,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {ClienteMapper.class, ProdutoMapper.class})
 public interface CheckoutMapper extends EntityMapper<CheckoutDTO, Checkout> {
 
+    @Mapping(source = "cliente", target = "clienteDTO")
     @Mapping(source = "cliente.id", target = "clienteId")
     CheckoutDTO toDto(Checkout checkout);
 

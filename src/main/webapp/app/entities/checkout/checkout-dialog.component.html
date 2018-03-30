@@ -13,21 +13,17 @@
                    [(ngModel)]="checkout.id" readonly />
         </div>
         <div class="form-group">
-            <!--<label class="form-control-label" jhiTranslate="appDoraApp.checkout.dataHora" for="field_dataHora">Data Hora</label>
-            <div class="d-flex">
-                <input id="field_dataHora" type="datetime-local" class="form-control" name="dataHora" [(ngModel)]="checkout.dataHora"
-                required/>
-            </div>
-            <div [hidden]="!(editForm.controls.dataHora?.dirty && editForm.controls.dataHora?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.dataHora?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.dataHora?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                    This field should be a date and time.
-                </small>
-            </div>-->
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.cliente" for="field_cliente">Cliente</label>
+            <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="checkout.clienteId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="clienteOption.id" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.userDTO.firstName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="appDoraApp.checkout.produto" for="field_produto">Produto</label>
+            <select class="form-control" id="field_produto" multiple name="produto" [(ngModel)]="checkout.produtos">
+                <option [ngValue]="getSelected(checkout.produtos, produtoOption)" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.checkout.quantidade" for="field_quantidade">Quantidade</label>
@@ -36,23 +32,10 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.checkout.desconto" for="field_desconto">Desconto</label>
-            <input type="number" class="form-control" name="desconto" id="field_desconto"
+            <input type="text" class="form-control" name="desconto" id="field_desconto" [textMask]="{mask: maskMoeda}"
                 [(ngModel)]="checkout.desconto" />
         </div>
 
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.cliente" for="field_cliente">Cliente</label>
-            <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="checkout.clienteId">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="clienteOption.id" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="appDoraApp.checkout.produto" for="field_produto">Produto</label>
-            <select class="form-control" id="field_produto" multiple name="produto" [(ngModel)]="checkout.produtos">
-                <option [ngValue]="getSelected(checkout.produtos, produtoOption)" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.id}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

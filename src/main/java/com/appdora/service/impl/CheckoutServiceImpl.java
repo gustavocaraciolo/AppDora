@@ -1,11 +1,15 @@
 package com.appdora.service.impl;
 
+import com.appdora.domain.Cliente;
+import com.appdora.repository.ClienteRepository;
 import com.appdora.service.CheckoutService;
 import com.appdora.domain.Checkout;
 import com.appdora.repository.CheckoutRepository;
 import com.appdora.repository.search.CheckoutSearchRepository;
 import com.appdora.service.dto.CheckoutDTO;
 import com.appdora.service.mapper.CheckoutMapper;
+import com.appdora.service.mapper.ClienteMapper;
+import com.appdora.service.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -31,10 +35,16 @@ public class CheckoutServiceImpl implements CheckoutService {
 
     private final CheckoutSearchRepository checkoutSearchRepository;
 
-    public CheckoutServiceImpl(CheckoutRepository checkoutRepository, CheckoutMapper checkoutMapper, CheckoutSearchRepository checkoutSearchRepository) {
+    private final ClienteRepository clienteRepository;
+
+    private final ClienteMapper clienteMapper;
+
+    public CheckoutServiceImpl(CheckoutRepository checkoutRepository, CheckoutMapper checkoutMapper, CheckoutSearchRepository checkoutSearchRepository, ClienteRepository clienteRepository, ClienteMapper clienteMapper) {
         this.checkoutRepository = checkoutRepository;
         this.checkoutMapper = checkoutMapper;
         this.checkoutSearchRepository = checkoutSearchRepository;
+        this.clienteRepository = clienteRepository;
+        this.clienteMapper = clienteMapper;
     }
 
     /**
@@ -46,8 +56,12 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Override
     public CheckoutDTO save(CheckoutDTO checkoutDTO) {
         log.debug("Request to save Checkout : {}", checkoutDTO);
+        Cliente cliente = clienteRepository.findOne(checkoutDTO.getClienteId());
+        checkoutDTO.setDesconto(RandomUtil.formatMoedaToBigdecimal(checkoutDTO.getDesconto()));
+        checkoutDTO.setClienteDTO(clienteMapper.toDto(cliente));
         Checkout checkout = checkoutMapper.toEntity(checkoutDTO);
         checkout = checkoutRepository.save(checkout);
+        checkout.setCliente(cliente);
         CheckoutDTO result = checkoutMapper.toDto(checkout);
         checkoutSearchRepository.save(checkout);
         return result;
