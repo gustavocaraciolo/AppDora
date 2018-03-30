@@ -29,7 +29,7 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="dataHora"><span jhiTranslate="appDoraApp.checkout.dataHora">Data Hora</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="quantidade"><span jhiTranslate="appDoraApp.checkout.quantidade">Quantidade</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="clienteId"><span jhiTranslate="appDoraApp.checkout.cliente">Cliente</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="desconto"><span jhiTranslate="appDoraApp.checkout.desconto">Desconto</span> <span class="fa fa-sort"></span></th>
@@ -38,7 +38,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let checkout of checkouts ;trackBy: trackId">
-                <td><a [routerLink]="['../checkout', checkout.id ]">{{checkout.id}}</a></td>
+                <td>{{checkout.dataHora | date:'medium'}}</td>
                 <td>{{checkout.quantidade}}</td>
                 <td>
                     <div *ngIf="checkout.clienteId">

@@ -19,7 +19,7 @@
             },
             "nome": "Nome",
             "quantidade": "Quantidade",
-            "preco": "Preco",
+            "preco": "Preco unitário",
             "categoria": "Categoria",
             "checkout": "Checkout"
         }
