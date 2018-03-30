@@ -24,6 +24,16 @@ public class CheckoutDTO implements Serializable {
 
     private Long clienteId;
 
+    public CheckoutDTO(Integer quantidade, BigDecimal desconto, Long clienteId, Set<ProdutoDTO> produtos) {
+        this.quantidade = quantidade;
+        this.desconto = desconto;
+        this.clienteId = clienteId;
+        this.produtos = produtos;
+    }
+
+    public CheckoutDTO() {
+    }
+
     private Set<ProdutoDTO> produtos = new HashSet<>();
 
     public Long getId() {

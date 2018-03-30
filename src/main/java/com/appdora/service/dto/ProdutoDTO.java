@@ -26,6 +26,15 @@ public class ProdutoDTO implements Serializable {
 
     private CategoriaDTO categoriaDTO;
 
+    public ProdutoDTO(){}
+
+    public ProdutoDTO(String nome, Integer quantidade, String preco, Long categoriaId) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.preco = preco;
+        this.categoriaId = categoriaId;
+    }
+
     public Long getId() {
         return id;
     }

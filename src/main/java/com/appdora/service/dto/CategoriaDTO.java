@@ -33,6 +33,11 @@ public class CategoriaDTO implements Serializable {
         this.nome = nome;
     }
 
+    public CategoriaDTO(){}
+
+    public CategoriaDTO(String nome){
+        this.nome = nome;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

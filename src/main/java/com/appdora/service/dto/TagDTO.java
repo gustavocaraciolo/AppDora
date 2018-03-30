@@ -33,6 +33,12 @@ public class TagDTO implements Serializable {
         this.nome = nome;
     }
 
+    public TagDTO(String nome){
+        this.nome = nome;
+    }
+
+    public TagDTO(){}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

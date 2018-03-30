@@ -30,6 +30,14 @@ public class ClienteDTO implements Serializable {
     public ClienteDTO() {
     }
 
+    public ClienteDTO(String name, String email, String telefone, Long tagId, Long userId){
+        this.name = name;
+        this.email = email;
+        this.telefone = telefone;
+        this.tagId = tagId;
+        this.userId = userId;
+    }
+
     public String getName() {
         return name;
     }
