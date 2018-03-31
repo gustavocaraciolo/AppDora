@@ -26,8 +26,8 @@ export class ProdutoDialogComponent implements OnInit {
 
     checkouts: Checkout[];
 
-    public maskNumber = MASK_NUMBER
-    public maskMoeda = MASK_MOEDA_KWANZA
+    public maskNumber = MASK_NUMBER;
+    public maskMoeda = MASK_MOEDA_KWANZA;
 
     constructor(
         public activeModal: NgbActiveModal,

@@ -26,7 +26,7 @@ export class ClienteDialogComponent implements OnInit {
 
     tags: Tag[];
 
-    public maskPhone = MASK_PHONE
+    public maskPhone = MASK_PHONE;
 
     constructor(
         public activeModal: NgbActiveModal,

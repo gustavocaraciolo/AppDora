@@ -11,7 +11,7 @@ import { CheckoutPopupService } from './checkout-popup.service';
 import { CheckoutService } from './checkout.service';
 import { Cliente, ClienteService } from '../cliente';
 import { Produto, ProdutoService } from '../produto';
-import {MASK_MOEDA_KWANZA} from "../../app.constants";
+import {MASK_MOEDA_KWANZA} from '../../app.constants';
 
 @Component({
     selector: 'jhi-checkout-dialog',
@@ -26,7 +26,7 @@ export class CheckoutDialogComponent implements OnInit {
 
     produtos: Produto[];
 
-    public maskMoeda = MASK_MOEDA_KWANZA
+    public maskMoeda = MASK_MOEDA_KWANZA;
 
     constructor(
         public activeModal: NgbActiveModal,
