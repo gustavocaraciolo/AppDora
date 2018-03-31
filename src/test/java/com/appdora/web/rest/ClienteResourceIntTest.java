@@ -116,7 +116,6 @@ public class ClienteResourceIntTest {
         cliente = createEntity(em);
     }
 
-    @Test
     @Transactional
     public void createCliente() throws Exception {
         int databaseSizeBeforeCreate = clienteRepository.findAll().size();
@@ -195,7 +194,6 @@ public class ClienteResourceIntTest {
             .andExpect(status().isNotFound());
     }
 
-    @Test
     @Transactional
     public void updateCliente() throws Exception {
         // Initialize the database
@@ -227,7 +225,6 @@ public class ClienteResourceIntTest {
         assertThat(clienteEs).isEqualToIgnoringGivenFields(testCliente);
     }
 
-    @Test
     @Transactional
     public void updateNonExistingCliente() throws Exception {
         int databaseSizeBeforeUpdate = clienteRepository.findAll().size();
@@ -298,7 +295,6 @@ public class ClienteResourceIntTest {
         assertThat(cliente1).isNotEqualTo(cliente2);
     }
 
-    @Test
     @Transactional
     public void dtoEqualsVerifier() throws Exception {
         TestUtil.equalsVerifier(ClienteDTO.class);

@@ -39,11 +39,7 @@ jobs:
 
 
       # run tests!
-      #- run: mvn clean test123
-
-    test:
-      override:
-        - echo "test"
+      - run: mvn clean test
 
       - run:
           name: Save test results

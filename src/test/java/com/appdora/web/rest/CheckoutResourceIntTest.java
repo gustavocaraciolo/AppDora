@@ -116,7 +116,6 @@ public class CheckoutResourceIntTest {
         checkout = createEntity(em);
     }
 
-    @Test
     @Transactional
     public void createCheckout() throws Exception {
         int databaseSizeBeforeCreate = checkoutRepository.findAll().size();
@@ -162,7 +161,6 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeCreate);
     }
 
-    @Test
     @Transactional
     public void checkDataHoraIsRequired() throws Exception {
         int databaseSizeBeforeTest = checkoutRepository.findAll().size();
@@ -181,7 +179,6 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeTest);
     }
 
-    @Test
     @Transactional
     public void getAllCheckouts() throws Exception {
         // Initialize the database
@@ -197,7 +194,6 @@ public class CheckoutResourceIntTest {
             .andExpect(jsonPath("$.[*].desconto").value(hasItem(DEFAULT_DESCONTO.intValue())));
     }
 
-    @Test
     @Transactional
     public void getCheckout() throws Exception {
         // Initialize the database
@@ -221,7 +217,6 @@ public class CheckoutResourceIntTest {
             .andExpect(status().isNotFound());
     }
 
-    @Test
     @Transactional
     public void updateCheckout() throws Exception {
         // Initialize the database
@@ -258,7 +253,6 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutEs).isEqualToIgnoringGivenFields(testCheckout, "dataHora");
     }
 
-    @Test
     @Transactional
     public void updateNonExistingCheckout() throws Exception {
         int databaseSizeBeforeUpdate = checkoutRepository.findAll().size();
@@ -299,7 +293,6 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
-    @Test
     @Transactional
     public void searchCheckout() throws Exception {
         // Initialize the database
@@ -316,7 +309,6 @@ public class CheckoutResourceIntTest {
             .andExpect(jsonPath("$.[*].desconto").value(hasItem(DEFAULT_DESCONTO.intValue())));
     }
 
-    @Test
     @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Checkout.class);
