@@ -9,7 +9,6 @@ jobs:
       # specify the version you desire here
       - image: gustavocaraciolo/circleci_build
 
-
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -22,8 +21,6 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
 
     steps:
-      - setup_remote_docker
-
       - checkout
 
       # Download and cache dependencies
@@ -33,14 +30,13 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      - run: mvn dependency:go-offline
+
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
+      # run tests!
+      - run: mvn integration-test
 
-      - run:
-          name: Build Docker Image
-          command: ./mvnw -Pprod
-          ##command: ./mvnw -Pprod clean test
-#          command: ./gradlew bootRepackage -Pprod pushDockerLatest pushDockerVersionTag -x test
