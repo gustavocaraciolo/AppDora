@@ -61,5 +61,5 @@ jobs:
           command: sudo npm install -g yarn
 
       - run:
-          name: Build Docker Image
-          command: mvn bootRepackage -Pprod pushDockerLatest pushDockerVersionTag
+            name: Build Docker Image
+            command: mvn bootRepackage -Pprod buildDocker -x
