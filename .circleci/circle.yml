@@ -38,7 +38,11 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn clean -DskipTests
+      - run: mvn clean
+
+    test:
+      override:
+       - "true"
 
       - run:
             name: Build Docker Image
