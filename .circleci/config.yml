@@ -68,4 +68,5 @@ jobs:
       - run:
           name: Build Docker Image
           command: ./mvnw -Pprod
+          ##command: ./mvnw -Pprod clean test
 #          command: ./gradlew bootRepackage -Pprod pushDockerLatest pushDockerVersionTag -x test
