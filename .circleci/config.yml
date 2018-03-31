@@ -61,5 +61,5 @@ jobs:
           command: sudo npm install -g yarn
 
       - run:
-            name: Build Docker Image
-            command: mvn bootRepackage -Pprod buildDocker
+          name: Build Docker Image
+          command: ./gradlew bootRepackage -Pprod pushDockerLatest pushDockerVersionTag -x test
