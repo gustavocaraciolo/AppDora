@@ -62,4 +62,4 @@ jobs:
 
       - run:
             name: Build Docker Image
-            command: mvn bootRepackage -Pprod buildDocker -x
+            command: mvn bootRepackage -Pprod buildDocker
