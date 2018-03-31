@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: gustavocaraciolo/circleci_build
+      - image: gustavocaraciolo/appdora
 
 
       # Specify service dependencies here if necessary
