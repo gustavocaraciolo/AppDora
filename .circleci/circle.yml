@@ -21,6 +21,8 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
 
     steps:
+      - setup_remote_docker
+
       - checkout
 
       # Download and cache dependencies
@@ -30,7 +32,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run: mvn dependency
 
       - save_cache:
           paths:
