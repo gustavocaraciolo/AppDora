@@ -12,20 +12,20 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.checkout.cliente" for="field_cliente">Cliente</label>
-            <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="checkout.clienteId">
+            <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="checkout.clienteId" required>
                 <option [ngValue]="null"></option>
                 <option [ngValue]="clienteOption.id" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.userDTO.firstName}}</option>
             </select>
         </div>
         <div class="form-group">
             <label jhiTranslate="appDoraApp.checkout.produto" for="field_produto">Produto</label>
-            <select class="form-control" id="field_produto" multiple name="produto" [(ngModel)]="checkout.produtos">
+            <select class="form-control" id="field_produto" multiple name="produto" [(ngModel)]="checkout.produtos" required>
                 <option [ngValue]="getSelected(checkout.produtos, produtoOption)" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="appDoraApp.checkout.quantidade" for="field_quantidade">Quantidade</label>
-            <input type="number" class="form-control" name="quantidade" id="field_quantidade"
+            <input type="number" class="form-control" name="quantidade" id="field_quantidade" required
                 [(ngModel)]="checkout.quantidade" />
         </div>
         <div class="form-group">
