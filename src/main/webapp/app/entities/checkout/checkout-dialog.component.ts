@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -7,7 +7,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Checkout } from './checkout.model';
-import { CheckoutPopupService } from './checkout-popup.service';
 import { CheckoutService } from './checkout.service';
 import { Cliente, ClienteService } from '../cliente';
 import { Produto, ProdutoService } from '../produto';
@@ -29,25 +28,27 @@ export class CheckoutDialogComponent implements OnInit {
     public maskMoeda = MASK_MOEDA_KWANZA;
 
     constructor(
-        public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private checkoutService: CheckoutService,
         private clienteService: ClienteService,
         private produtoService: ProdutoService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private activatedRoute: ActivatedRoute,
+        private router: Router
+
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.activatedRoute.data.subscribe(({checkout}) => {
+            this.checkout = checkout.body ? checkout.body : checkout;
+        });
+
         this.clienteService.query()
             .subscribe((res: HttpResponse<Cliente[]>) => { this.clientes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.produtoService.query()
             .subscribe((res: HttpResponse<Produto[]>) => { this.produtos = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-    }
-
-    clear() {
-        this.activeModal.dismiss('cancel');
     }
 
     save() {
@@ -67,9 +68,12 @@ export class CheckoutDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: Checkout) {
-        this.eventManager.broadcast({ name: 'checkoutListModification', content: 'OK'});
         this.isSaving = false;
-        this.activeModal.dismiss(result);
+        this.previousState();
+    }
+
+    previousState() {
+        window.history.back();
     }
 
     private onSaveError() {
@@ -97,35 +101,5 @@ export class CheckoutDialogComponent implements OnInit {
             }
         }
         return option;
-    }
-}
-
-@Component({
-    selector: 'jhi-checkout-popup',
-    template: ''
-})
-export class CheckoutPopupComponent implements OnInit, OnDestroy {
-
-    routeSub: any;
-
-    constructor(
-        private route: ActivatedRoute,
-        private checkoutPopupService: CheckoutPopupService
-    ) {}
-
-    ngOnInit() {
-        this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
-                this.checkoutPopupService
-                    .open(CheckoutDialogComponent as Component, params['id']);
-            } else {
-                this.checkoutPopupService
-                    .open(CheckoutDialogComponent as Component);
-            }
-        });
-    }
-
-    ngOnDestroy() {
-        this.routeSub.unsubscribe();
     }
 }

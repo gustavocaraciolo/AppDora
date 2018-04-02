@@ -1,11 +1,9 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div class="modal-header">
+    <div>
         <h4 class="modal-title" id="myCheckoutLabel" jhiTranslate="appDoraApp.checkout.home.createOrEditLabel">Create or edit a Checkout</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;</button>
     </div>
-    <div class="modal-body">
+    <div>
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group" [hidden]="!checkout.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
@@ -37,8 +35,8 @@
         </div>
 
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+    <div>
+        <button type="button" (click)="previousState()" class="btn btn-secondary">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">

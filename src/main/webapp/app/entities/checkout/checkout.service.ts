@@ -81,7 +81,7 @@ export class CheckoutService {
     private convert(checkout: Checkout): Checkout {
         const copy: Checkout = Object.assign({}, checkout);
 
-        copy.dataHora = this.dateUtils.toDate(checkout.dataHora);
+        //copy.dataHora = this.dateUtils.toDate(checkout.dataHora);
         return copy;
     }
 }

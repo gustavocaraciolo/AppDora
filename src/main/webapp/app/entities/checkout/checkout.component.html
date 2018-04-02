@@ -1,7 +1,7 @@
 <div>
     <h2>
         <span jhiTranslate="appDoraApp.checkout.home.title">Checkouts</span>
-        <button class="btn btn-primary float-right jh-create-entity create-checkout" [routerLink]="['/', { outlets: { popup: ['checkout-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-checkout" [routerLink]="['../checkout/new']">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="appDoraApp.checkout.home.createLabel">
             Create new Checkout
@@ -55,21 +55,19 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>-->
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'checkout/'+ checkout.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
+                                [routerLink]="['/checkout',checkout.id,'edit']"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <!--<button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'checkout/'+ checkout.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                        </button>-->
                     </div>
                 </td>
             </tr>
