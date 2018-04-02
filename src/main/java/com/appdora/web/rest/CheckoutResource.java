@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -57,6 +58,7 @@ public class CheckoutResource {
         if (checkoutDTO.getId() != null) {
             throw new BadRequestAlertException("A new checkout cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        checkoutDTO.setDataHora(ZonedDateTime.now());
         CheckoutDTO result = checkoutService.save(checkoutDTO);
         return ResponseEntity.created(new URI("/api/checkouts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

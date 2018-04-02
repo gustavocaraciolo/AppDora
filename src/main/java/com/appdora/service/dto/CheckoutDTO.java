@@ -16,6 +16,8 @@ public class CheckoutDTO implements Serializable {
 
     private Long id;
 
+    private ZonedDateTime dataHora;
+
     private Integer quantidade;
 
     private String desconto;
@@ -45,7 +47,11 @@ public class CheckoutDTO implements Serializable {
     }
 
     public ZonedDateTime getDataHora() {
-        return ZonedDateTime.now();
+        return dataHora;
+    }
+
+    public void setDataHora(ZonedDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 
     public Integer getQuantidade() {
