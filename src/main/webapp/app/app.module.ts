@@ -18,6 +18,7 @@ import { AppDoraAccountModule } from './account/account.module';
 import { AppDoraEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
+import { AppDoraprimengModule } from './primeng/primeng.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
     JhiMainComponent,
@@ -38,7 +39,8 @@ import {
         AppDoraHomeModule,
         AppDoraAdminModule,
         AppDoraAccountModule,
-        AppDoraEntityModule
+        AppDoraEntityModule,
+        AppDoraprimengModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
