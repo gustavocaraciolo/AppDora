@@ -1,6 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DatePipe } from '@angular/common';
-
 import {
     AppDoraSharedLibsModule,
     AppDoraSharedCommonModule,
@@ -20,6 +19,10 @@ import {
 import {SnackbarComponent} from "./messages/snackbar/snackbar.component";
 import {NotificationService} from "./messages/notification.service";
 import {CarrinhoService} from "../entities/vendas/carrinho/carrinho.service";
+import {RadioComponent} from "./radio/radio.component";
+import {InputComponent} from "./input/input.component";
+import {RatingComponent} from "./rating/rating.component";
+import {OrderService} from "../entities/vendas/order/order.service";
 
 @NgModule({
     imports: [
@@ -30,7 +33,10 @@ import {CarrinhoService} from "../entities/vendas/carrinho/carrinho.service";
         JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        SnackbarComponent
+        SnackbarComponent,
+        RadioComponent,
+        InputComponent,
+        RatingComponent,
     ],
     providers: [
         LoginService,
@@ -44,7 +50,8 @@ import {CarrinhoService} from "../entities/vendas/carrinho/carrinho.service";
         UserService,
         DatePipe,
         NotificationService,
-        CarrinhoService
+        CarrinhoService,
+        OrderService,
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [
@@ -53,7 +60,10 @@ import {CarrinhoService} from "../entities/vendas/carrinho/carrinho.service";
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         DatePipe,
-        SnackbarComponent
+        SnackbarComponent,
+        RadioComponent,
+        InputComponent,
+        RatingComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

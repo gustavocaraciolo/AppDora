@@ -19,7 +19,8 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+public class
+DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CheckoutRepository checkoutRepository;
     private final ProdutoRepository produtoRepository;
@@ -68,6 +69,10 @@ public class DoraBootstrap implements ApplicationListener<ContextRefreshedEvent>
         List<CheckoutDTO> checkoutDTOS = new ArrayList<>();
         Set<ProdutoDTO> listProduto = new LinkedHashSet<ProdutoDTO>(produtoMapper.toDto(this.produtos));
         listProduto.add(new ProdutoDTO("Saia Mid", 20, "23", this.categorias.get(0).getId()));
+        listProduto.add(new ProdutoDTO("Macacao", 20, "67", this.categorias.get(0).getId()));
+        listProduto.add(new ProdutoDTO("Bermuda", 2, "32", this.categorias.get(2).getId()));
+        listProduto.add(new ProdutoDTO("Calça", 2, "3", this.categorias.get(1).getId()));
+        listProduto.add(new ProdutoDTO("Boné", 2, "12", this.categorias.get(1).getId()));
         checkoutDTOS.add(new CheckoutDTO(2,"0.01",this.clientes.get(2).getId(),listProduto));
         List<Checkout> checkouts = checkoutMapper.toEntity(checkoutDTOS);
         checkoutRepository.save(checkouts);
@@ -77,6 +82,10 @@ public class DoraBootstrap implements ApplicationListener<ContextRefreshedEvent>
     private void loadProduto(){
         List<ProdutoDTO> produtoDTOS = new ArrayList<>();
         produtoDTOS.add(new ProdutoDTO("Saia Mid", 20, "23",this.categorias.get(0).getId()));
+        produtoDTOS.add(new ProdutoDTO("Macacao", 20, "67", this.categorias.get(0).getId()));
+        produtoDTOS.add(new ProdutoDTO("Bermuda", 2, "32", this.categorias.get(2).getId()));
+        produtoDTOS.add(new ProdutoDTO("Calça", 2, "3", this.categorias.get(1).getId()));
+        produtoDTOS.add(new ProdutoDTO("Boné", 2, "12", this.categorias.get(1).getId()));
         List<Produto> produtos = produtoMapper.toEntity(produtoDTOS);
         produtoRepository.save(produtos);
         this.produtos = produtos;
