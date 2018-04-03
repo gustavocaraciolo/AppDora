@@ -1,108 +1,33 @@
-<div class="container">
-    <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h4 class="modal-title" id="myCheckoutLabel" jhiTranslate="appDoraApp.checkout.home.createOrEditLabel">Create or edit a Checkout</h4>
-    </div>
-
+<div>
+    <jhi-alert></jhi-alert>
     <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Your cart</span>
-                <span class="badge badge-secondary badge-pill">3</span>
-            </h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Product name</h6>
-                        <small class="text-muted">Brief description</small>
-                    </div>
-                    <span class="text-muted">$12</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Second product</h6>
-                        <small class="text-muted">Brief description</small>
-                    </div>
-                    <span class="text-muted">$8</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Third item</h6>
-                        <small class="text-muted">Brief description</small>
-                    </div>
-                    <span class="text-muted">$5</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between bg-light">
-                    <div class="text-success">
-                        <h6 class="my-0">Promo code</h6>
-                        <small>EXAMPLECODE</small>
-                    </div>
-                    <span class="text-success">-$5</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (USD)</span>
-                    <strong>$20</strong>
-                </li>
-            </ul>
-
-            <form class="card p-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Promo code">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
-                    </div>
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'appDoraApp.produto.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
                 </div>
             </form>
         </div>
-        <div class="col-md-8 order-md-1">
-            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-                <div>
-                    <jhi-alert-error></jhi-alert-error>
-                    <div class="form-group" [hidden]="!checkout.id">
-                        <label for="id" jhiTranslate="global.field.id">ID</label>
-                        <input type="text" class="form-control" id="id" name="id"
-                               [(ngModel)]="checkout.id" readonly />
-                    </div>
-                    <div class="form-group-primeng">
-                        <p-autoComplete [(ngModel)]="produto" name="basic" field="nome"
-                                        [suggestions]="produtos" class="form-group-primeng"
-                                        (completeMethod)="filterProdutos($event)">
-                        </p-autoComplete>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="appDoraApp.checkout.cliente" for="field_cliente">Cliente</label>
-                        <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="checkout.clienteId" required>
-                            <option [ngValue]="null"></option>
-                            <option [ngValue]="clienteOption.id" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.userDTO.firstName}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label jhiTranslate="appDoraApp.checkout.produto" for="field_produto">Produto</label>
-                        <select class="form-control" id="field_produto" multiple name="produto" [(ngModel)]="checkout.produtos" required>
-                            <option [ngValue]="getSelected(checkout.produtos, produtoOption)" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="appDoraApp.checkout.quantidade" for="field_quantidade">Quantidade</label>
-                        <input type="number" class="form-control" name="quantidade" id="field_quantidade" required
-                               [(ngModel)]="checkout.quantidade" />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="appDoraApp.checkout.desconto" for="field_desconto">Desconto</label>
-                        <input type="text" class="form-control" name="desconto" id="field_desconto" [textMask]="{mask: maskMoeda}"
-                               [(ngModel)]="checkout.desconto" />
-                    </div>
+    </div>
+    <br/>
 
-                </div>
-                <div>
-                    <button type="button" (click)="previousState()" class="btn btn-secondary">
-                        <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>
-                    <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                        <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                    </button>
-                </div>
-            </form>
+    <div *ngIf="produtos">
+        <div *ngFor="let produto of produtos ;trackBy: trackId">
+            <p-card title="{{produto.nome}}" subtitle="{{produto.categoriaDTO.nome}}" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+                <!--<p-header>
+                    <img src="Card" src="assets/showcase/images/usercard.png">
+                </p-header>-->
+                <div>{{produto.preco}}</div>
+                <p-footer>
+                    <button pButton type="button" label="Adicionar" icon="fa fa-plus-circle"></button>
+                </p-footer>
+            </p-card>
         </div>
     </div>
 </div>

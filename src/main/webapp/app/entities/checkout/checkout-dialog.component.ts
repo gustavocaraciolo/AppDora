@@ -11,7 +11,6 @@ import { CheckoutService } from './checkout.service';
 import { Cliente, ClienteService } from '../cliente';
 import { Produto, ProdutoService } from '../produto';
 import {MASK_MOEDA_KWANZA} from '../../app.constants';
-import Country from "../../primeng/inputs/autocomplete/service/country";
 
 @Component({
     selector: 'jhi-checkout-dialog',
