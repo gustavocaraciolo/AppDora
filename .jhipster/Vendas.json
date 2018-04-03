@@ -1,0 +1,11 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [],
+    "changelogDate": "20180403155435",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "vendas",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

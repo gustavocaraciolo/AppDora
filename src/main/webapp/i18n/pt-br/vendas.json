@@ -1,0 +1,22 @@
+
+{
+    "appDoraApp": {
+        "vendas" : {
+            "home": {
+                "title": "Vendas",
+                "createLabel": "Criar novo Vendas",
+                "createOrEditLabel": "Criar ou editar Vendas",
+                "search": "Pesquisar por Vendas"
+            },
+            "created": "Um novo Vendas foi criado com o identificador {{ param }}",
+            "updated": "Um Vendas foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Vendas foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Vendas {{ id }}?"
+            },
+            "detail": {
+                "title": "Vendas"
+            }
+        }
+    }
+}

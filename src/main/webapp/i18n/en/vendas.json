@@ -1,0 +1,22 @@
+
+{
+    "appDoraApp": {
+        "vendas" : {
+            "home": {
+                "title": "Vendas",
+                "createLabel": "Create a new Vendas",
+                "createOrEditLabel": "Create or edit a Vendas",
+                "search": "Search for Vendas"
+            },
+            "created": "A new Vendas is created with identifier {{ param }}",
+            "updated": "A Vendas is updated with identifier {{ param }}",
+            "deleted": "A Vendas is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Vendas {{ id }}?"
+            },
+            "detail": {
+                "title": "Vendas"
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+<!--INÍCIO DO MENU -->
+<div class="row">
+    <div class="col-md-9 col-xs-12">
+
+        <jhi-carrinho-vendas-item
+            *ngFor="let item of produtos" [menuItem]="item" (add)="shoppingCart.addItem($event)" ></jhi-carrinho-vendas-item>
+
+    </div>
+    <div class="col-md-3 col-xs-12">
+        <jhi-carrinho #shoppingCart></jhi-carrinho>
+    </div>
+</div>
+<!-- FIM DO MENU -->

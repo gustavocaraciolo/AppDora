@@ -97,6 +97,7 @@
                 "categoria": "Categoria",
                 "cliente": "Cliente",
                 "tag": "Tag",
+                "vendas": "Vendas",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

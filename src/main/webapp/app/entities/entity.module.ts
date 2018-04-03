@@ -6,6 +6,7 @@ import { AppDoraCategoriaModule } from './categoria/categoria.module';
 import { AppDoraClienteModule } from './cliente/cliente.module';
 import { AppDoraTagModule } from './tag/tag.module';
 
+import { AppDoraVendasModule } from './vendas/vendas.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AppDoraTagModule } from './tag/tag.module';
         AppDoraCategoriaModule,
         AppDoraClienteModule,
         AppDoraTagModule,
+        AppDoraVendasModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

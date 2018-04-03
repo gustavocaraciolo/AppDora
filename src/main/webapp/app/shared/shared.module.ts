@@ -17,6 +17,9 @@ import {
     JhiSocialComponent,
     SocialService,
 } from './';
+import {SnackbarComponent} from "./messages/snackbar/snackbar.component";
+import {NotificationService} from "./messages/notification.service";
+import {CarrinhoService} from "../entities/vendas/carrinho/carrinho.service";
 
 @NgModule({
     imports: [
@@ -26,7 +29,8 @@ import {
     declarations: [
         JhiSocialComponent,
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        SnackbarComponent
     ],
     providers: [
         LoginService,
@@ -38,7 +42,9 @@ import {
         AuthServerProvider,
         SocialService,
         UserService,
-        DatePipe
+        DatePipe,
+        NotificationService,
+        CarrinhoService
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [
@@ -46,7 +52,8 @@ import {
         JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe
+        DatePipe,
+        SnackbarComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
