@@ -63,9 +63,9 @@
                         <input type="text" class="form-control" id="id" name="id"
                                [(ngModel)]="checkout.id" readonly />
                     </div>
-                    <div>
+                    <div class="form-group-primeng">
                         <p-autoComplete [(ngModel)]="produto" name="basic" field="nome"
-                                        [suggestions]="produtos"
+                                        [suggestions]="produtos" class="form-group-primeng"
                                         (completeMethod)="filterProdutos($event)">
                         </p-autoComplete>
                     </div>
