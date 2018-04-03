@@ -4,6 +4,8 @@ import {FormsModule} from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
 import { AppDoraSharedModule } from '../../shared';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
 import {
     CheckoutService,
     CheckoutComponent,
@@ -25,6 +27,7 @@ const ENTITY_STATES = [
     imports: [
         AppDoraSharedModule,
         FormsModule,
+        AutoCompleteModule,
         TextMaskModule,
         RouterModule.forChild(ENTITY_STATES)
     ],

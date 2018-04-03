@@ -11,6 +11,7 @@ import { CheckoutService } from './checkout.service';
 import { Cliente, ClienteService } from '../cliente';
 import { Produto, ProdutoService } from '../produto';
 import {MASK_MOEDA_KWANZA} from '../../app.constants';
+import Country from "../../primeng/inputs/autocomplete/service/country";
 
 @Component({
     selector: 'jhi-checkout-dialog',
@@ -65,6 +66,23 @@ export class CheckoutDialogComponent implements OnInit {
     private subscribeToSaveResponse(result: Observable<HttpResponse<Checkout>>) {
         result.subscribe((res: HttpResponse<Checkout>) =>
             this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    filterProdutos(event: any) {
+        const query = event.query;
+        this.produtoService.query().subscribe((res: HttpResponse<Produto[]>) => {
+            this.produtos = this.filterProduto(query, res.body);
+                }, (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    filterProduto(query: any, produtos: Produto[]): Produto[] {
+        const filtered: any[] = [];
+        for (const produto of produtos) {
+            if (produto.nome.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+                filtered.push(produto);
+            }
+        }
+        return filtered;
     }
 
     private onSaveSuccess(result: Checkout) {
