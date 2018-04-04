@@ -10,7 +10,7 @@ import { CheckoutDialogComponent } from '../../../../../../main/webapp/app/entit
 import { CheckoutService } from '../../../../../../main/webapp/app/entities/checkout/checkout.service';
 import { Checkout } from '../../../../../../main/webapp/app/entities/checkout/checkout.model';
 import { ClienteService } from '../../../../../../main/webapp/app/entities/cliente';
-import { ProdutoService } from '../../../../../../main/webapp/app/entities/produto';
+import { ItensCheckoutService } from '../../../../../../main/webapp/app/entities/itens-checkout';
 
 describe('Component Tests', () => {
 
@@ -27,7 +27,7 @@ describe('Component Tests', () => {
                 declarations: [CheckoutDialogComponent],
                 providers: [
                     ClienteService,
-                    ProdutoService,
+                    ItensCheckoutService,
                     CheckoutService
                 ]
             })

@@ -53,6 +53,10 @@ public class CacheConfiguration {
             cm.createCache(com.appdora.domain.Tag.class.getName() + ".clientes", jcacheConfiguration);
             cm.createCache(com.appdora.domain.Categoria.class.getName() + ".produtos", jcacheConfiguration);
             cm.createCache(com.appdora.domain.Cliente.class.getName() + ".checkouts", jcacheConfiguration);
+            cm.createCache(com.appdora.domain.Checkout.class.getName() + ".itensCheckouts", jcacheConfiguration);
+            cm.createCache(com.appdora.domain.Produto.class.getName() + ".itensCheckouts", jcacheConfiguration);
+            cm.createCache(com.appdora.domain.ItensCheckout.class.getName(), jcacheConfiguration);
+            cm.createCache(com.appdora.domain.ItensCheckout.class.getName() + ".checkouts", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

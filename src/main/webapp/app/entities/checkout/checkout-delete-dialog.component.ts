@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { Checkout } from './checkout.model';
+import { CheckoutPopupService } from './checkout-popup.service';
 import { CheckoutService } from './checkout.service';
 
 @Component({
@@ -41,32 +42,23 @@ export class CheckoutDeleteDialogComponent {
     selector: 'jhi-checkout-delete-popup',
     template: ''
 })
-export class CheckoutDeletePopupComponent implements OnInit {
+export class CheckoutDeletePopupComponent implements OnInit, OnDestroy {
 
-    private ngbModalRef: NgbModalRef;
+    routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
-        private modalService: NgbModal
-    ) {
-    }
+        private checkoutPopupService: CheckoutPopupService
+    ) {}
 
     ngOnInit() {
-        this.route.data.subscribe(({checkout}) => {
-            setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(CheckoutDeleteDialogComponent as Component, { size: 'lg', backdrop: 'static'});
-                console.log(checkout)
-                this.ngbModalRef.componentInstance.checkout = checkout.body;
-                this.ngbModalRef.result.then((result) => {
-                    this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
-                    this.ngbModalRef = null;
-                }, (reason) => {
-                    this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
-                    this.ngbModalRef = null;
-                });
-            }, 0);
+        this.routeSub = this.route.params.subscribe((params) => {
+            this.checkoutPopupService
+                .open(CheckoutDeleteDialogComponent as Component, params['id']);
         });
     }
 
+    ngOnDestroy() {
+        this.routeSub.unsubscribe();
+    }
 }

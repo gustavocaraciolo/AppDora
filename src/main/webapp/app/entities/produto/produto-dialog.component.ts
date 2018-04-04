@@ -34,28 +34,14 @@ export class ProdutoDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private produtoService: ProdutoService,
         private categoriaService: CategoriaService,
-        private checkoutService: CheckoutService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.categoriaService
-            .query({filter: 'produto-is-null'})
-            .subscribe((res: HttpResponse<Categoria[]>) => {
-                if (!this.produto.categoriaId) {
-                    this.categorias = res.body;
-                } else {
-                    this.categoriaService
-                        .find(this.produto.categoriaId)
-                        .subscribe((subRes: HttpResponse<Categoria>) => {
-                            this.categorias = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.checkoutService.query()
-            .subscribe((res: HttpResponse<Checkout[]>) => { this.checkouts = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.categoriaService.query()
+            .subscribe((res: HttpResponse<Categoria[]>) => { this.categorias = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -94,21 +80,6 @@ export class ProdutoDialogComponent implements OnInit {
 
     trackCategoriaById(index: number, item: Categoria) {
         return item.id;
-    }
-
-    trackCheckoutById(index: number, item: Checkout) {
-        return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
 }
 

@@ -1,0 +1,9 @@
+{
+    "appDoraApp": {
+        "FormaDePagamento" : {
+            "null": "",
+            "DINHEIRO": "DINHEIRO",
+            "PARCELADO": "PARCELADO"
+        }
+    }
+}

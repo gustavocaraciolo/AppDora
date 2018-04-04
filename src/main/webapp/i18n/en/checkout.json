@@ -18,10 +18,11 @@
                 "title": "Checkout"
             },
             "dataHora": "Data Hora",
-            "quantidade": "Quantidade",
             "desconto": "Desconto",
+            "precoTotal": "Preco Total",
+            "formaPagamento": "Forma Pagamento",
             "cliente": "Cliente",
-            "produto": "Produto"
+            "itensCheckout": "Itens Checkout"
         }
     }
 }

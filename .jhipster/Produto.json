@@ -8,10 +8,9 @@
             "otherEntityField": "id"
         },
         {
-            "relationshipType": "many-to-many",
-            "relationshipName": "checkout",
-            "otherEntityName": "checkout",
-            "ownerSide": false,
+            "relationshipType": "one-to-many",
+            "relationshipName": "itensCheckout",
+            "otherEntityName": "itensCheckout",
             "otherEntityRelationshipName": "produto"
         }
     ],

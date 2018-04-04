@@ -1,0 +1,25 @@
+
+{
+    "appDoraApp": {
+        "itensCheckout" : {
+            "home": {
+                "title": "Itens Checkouts",
+                "createLabel": "Criar novo Itens Checkout",
+                "createOrEditLabel": "Criar ou editar Itens Checkout",
+                "search": "Pesquisar por Itens Checkout"
+            },
+            "created": "Um novo Itens Checkout foi criado com o identificador {{ param }}",
+            "updated": "Um Itens Checkout foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Itens Checkout foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Itens Checkout {{ id }}?"
+            },
+            "detail": {
+                "title": "Itens Checkout"
+            },
+            "quantidade": "Quantidade",
+            "produto": "Produto",
+            "checkout": "Checkout"
+        }
+    }
+}

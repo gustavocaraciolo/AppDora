@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.appdora.domain.enumeration.FormaDePagamento;
+
 /**
  * A Checkout.
  */
@@ -33,21 +35,25 @@ public class Checkout implements Serializable {
     @Column(name = "data_hora", nullable = false)
     private ZonedDateTime dataHora;
 
-    @Column(name = "quantidade")
-    private Integer quantidade;
-
     @Column(name = "desconto", precision=10, scale=2)
     private BigDecimal desconto;
+
+    @Column(name = "preco_total", precision=10, scale=2)
+    private BigDecimal precoTotal;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "forma_pagamento")
+    private FormaDePagamento formaPagamento;
 
     @ManyToOne
     private Cliente cliente;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "checkout_produto",
+    @JoinTable(name = "checkout_itens_checkout",
                joinColumns = @JoinColumn(name="checkouts_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="produtos_id", referencedColumnName="id"))
-    private Set<Produto> produtos = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name="itens_checkouts_id", referencedColumnName="id"))
+    private Set<ItensCheckout> itensCheckouts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -71,19 +77,6 @@ public class Checkout implements Serializable {
         this.dataHora = dataHora;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public Checkout quantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-        return this;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
     public BigDecimal getDesconto() {
         return desconto;
     }
@@ -95,6 +88,32 @@ public class Checkout implements Serializable {
 
     public void setDesconto(BigDecimal desconto) {
         this.desconto = desconto;
+    }
+
+    public BigDecimal getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public Checkout precoTotal(BigDecimal precoTotal) {
+        this.precoTotal = precoTotal;
+        return this;
+    }
+
+    public void setPrecoTotal(BigDecimal precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
+    public FormaDePagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public Checkout formaPagamento(FormaDePagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+        return this;
+    }
+
+    public void setFormaPagamento(FormaDePagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     public Cliente getCliente() {
@@ -110,29 +129,29 @@ public class Checkout implements Serializable {
         this.cliente = cliente;
     }
 
-    public Set<Produto> getProdutos() {
-        return produtos;
+    public Set<ItensCheckout> getItensCheckouts() {
+        return itensCheckouts;
     }
 
-    public Checkout produtos(Set<Produto> produtos) {
-        this.produtos = produtos;
+    public Checkout itensCheckouts(Set<ItensCheckout> itensCheckouts) {
+        this.itensCheckouts = itensCheckouts;
         return this;
     }
 
-    public Checkout addProduto(Produto produto) {
-        this.produtos.add(produto);
-        produto.getCheckouts().add(this);
+    public Checkout addItensCheckout(ItensCheckout itensCheckout) {
+        this.itensCheckouts.add(itensCheckout);
+        itensCheckout.getCheckouts().add(this);
         return this;
     }
 
-    public Checkout removeProduto(Produto produto) {
-        this.produtos.remove(produto);
-        produto.getCheckouts().remove(this);
+    public Checkout removeItensCheckout(ItensCheckout itensCheckout) {
+        this.itensCheckouts.remove(itensCheckout);
+        itensCheckout.getCheckouts().remove(this);
         return this;
     }
 
-    public void setProdutos(Set<Produto> produtos) {
-        this.produtos = produtos;
+    public void setItensCheckouts(Set<ItensCheckout> itensCheckouts) {
+        this.itensCheckouts = itensCheckouts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -161,8 +180,9 @@ public class Checkout implements Serializable {
         return "Checkout{" +
             "id=" + getId() +
             ", dataHora='" + getDataHora() + "'" +
-            ", quantidade=" + getQuantidade() +
             ", desconto=" + getDesconto() +
+            ", precoTotal=" + getPrecoTotal() +
+            ", formaPagamento='" + getFormaPagamento() + "'" +
             "}";
     }
 }

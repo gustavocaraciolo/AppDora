@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Checkout and its DTO CheckoutDTO.
  */
-@Mapper(componentModel = "spring", uses = {ClienteMapper.class, ProdutoMapper.class})
+@Mapper(componentModel = "spring", uses = {ClienteMapper.class, ItensCheckoutMapper.class})
 public interface CheckoutMapper extends EntityMapper<CheckoutDTO, Checkout> {
 
     @Mapping(source = "cliente", target = "clienteDTO")

@@ -1,7 +1,7 @@
 <div>
     <h2>
         <span jhiTranslate="appDoraApp.checkout.home.title">Checkouts</span>
-        <button class="btn btn-primary float-right jh-create-entity create-checkout" [routerLink]="['../checkout/new']">
+        <button class="btn btn-primary float-right jh-create-entity create-checkout" [routerLink]="['/', { outlets: { popup: ['checkout-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="appDoraApp.checkout.home.createLabel">
             Create new Checkout
@@ -29,45 +29,51 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="dataHora"><span jhiTranslate="appDoraApp.checkout.dataHora">Data Hora</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="quantidade"><span jhiTranslate="appDoraApp.checkout.quantidade">Quantidade</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="clienteId"><span jhiTranslate="appDoraApp.checkout.cliente">Cliente</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dataHora"><span jhiTranslate="appDoraApp.checkout.dataHora">Data Hora</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="desconto"><span jhiTranslate="appDoraApp.checkout.desconto">Desconto</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="precoTotal"><span jhiTranslate="appDoraApp.checkout.precoTotal">Preco Total</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="formaPagamento"><span jhiTranslate="appDoraApp.checkout.formaPagamento">Forma Pagamento</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="clienteId"><span jhiTranslate="appDoraApp.checkout.cliente">Cliente</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let checkout of checkouts ;trackBy: trackId">
+                <td><a [routerLink]="['../checkout', checkout.id ]">{{checkout.id}}</a></td>
                 <td>{{checkout.dataHora | date:'medium'}}</td>
-                <td>{{checkout.quantidade}}</td>
+                <td>{{checkout.desconto}}</td>
+                <td>{{checkout.precoTotal}}</td>
+                <td jhiTranslate="{{'appDoraApp.FormaDePagamento.' + checkout.formaPagamento}}">{{checkout.formaPagamento}}</td>
                 <td>
                     <div *ngIf="checkout.clienteId">
-                        <a [routerLink]="['../cliente', checkout.clienteId  ]" >{{checkout.clienteDTO.name}}</a>
+                        <a [routerLink]="['../cliente', checkout.clienteId  ]" >{{checkout.clienteId}}</a>
                     </div>
                 </td>
-                <td>{{checkout.desconto}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <!--<button type="submit"
+                        <button type="submit"
                                 [routerLink]="['../checkout', checkout.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>-->
+                        </button>
                         <button type="submit"
-                                [routerLink]="['/checkout',checkout.id,'edit']"
+                                [routerLink]="['/', { outlets: { popup: 'checkout/'+ checkout.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <!--<button type="submit"
+                        <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'checkout/'+ checkout.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>-->
+                        </button>
                     </div>
                 </td>
             </tr>

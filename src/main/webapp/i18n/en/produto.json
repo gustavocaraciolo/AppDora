@@ -19,9 +19,9 @@
             },
             "nome": "Nome",
             "quantidade": "Quantidade",
-            "preco": "Preco unitário",
+            "preco": "Preco",
             "categoria": "Categoria",
-            "checkout": "Checkout"
+            "itensCheckout": "Itens Checkout"
         }
     }
 }

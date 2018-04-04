@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import com.appdora.domain.enumeration.FormaDePagamento;
 
 /**
  * A DTO for the Checkout entity.
@@ -18,25 +19,17 @@ public class CheckoutDTO implements Serializable {
 
     private ZonedDateTime dataHora;
 
-    private Integer quantidade;
+    private BigDecimal desconto;
 
-    private String desconto;
+    private BigDecimal precoTotal;
+
+    private FormaDePagamento formaPagamento;
 
     private Long clienteId;
 
     private ClienteDTO clienteDTO;
 
-    public CheckoutDTO(Integer quantidade, String desconto, Long clienteId, Set<ProdutoDTO> produtos) {
-        this.quantidade = quantidade;
-        this.desconto = desconto;
-        this.clienteId = clienteId;
-        this.produtos = produtos;
-    }
-
-    public CheckoutDTO() {
-    }
-
-    private Set<ProdutoDTO> produtos = new HashSet<>();
+    private Set<ItensCheckoutDTO> itensCheckouts = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -54,20 +47,28 @@ public class CheckoutDTO implements Serializable {
         this.dataHora = dataHora;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getDesconto() {
+    public BigDecimal getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(String desconto) {
+    public void setDesconto(BigDecimal desconto) {
         this.desconto = desconto;
+    }
+
+    public BigDecimal getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(BigDecimal precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
+    public FormaDePagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaDePagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     public Long getClienteId() {
@@ -78,12 +79,12 @@ public class CheckoutDTO implements Serializable {
         this.clienteId = clienteId;
     }
 
-    public Set<ProdutoDTO> getProdutos() {
-        return produtos;
+    public Set<ItensCheckoutDTO> getItensCheckouts() {
+        return itensCheckouts;
     }
 
-    public void setProdutos(Set<ProdutoDTO> produtos) {
-        this.produtos = produtos;
+    public void setItensCheckouts(Set<ItensCheckoutDTO> itensCheckouts) {
+        this.itensCheckouts = itensCheckouts;
     }
 
     public ClienteDTO getClienteDTO() {
@@ -120,8 +121,9 @@ public class CheckoutDTO implements Serializable {
         return "CheckoutDTO{" +
             "id=" + getId() +
             ", dataHora='" + getDataHora() + "'" +
-            ", quantidade=" + getQuantidade() +
             ", desconto=" + getDesconto() +
+            ", precoTotal=" + getPrecoTotal() +
+            ", formaPagamento='" + getFormaPagamento() + "'" +
             "}";
     }
 }

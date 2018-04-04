@@ -5,28 +5,22 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 import { UserRouteAccessService } from '../../shared';
 import { CheckoutComponent } from './checkout.component';
 import { CheckoutDetailComponent } from './checkout-detail.component';
-import {CheckoutDeletePopupComponent} from './checkout-delete-dialog.component';
-import { CheckoutService } from './checkout.service';
-import { Checkout } from './checkout.model';
-import { CheckoutDialogComponent } from '.';
+import { CheckoutPopupComponent } from './checkout-dialog.component';
+import { CheckoutDeletePopupComponent } from './checkout-delete-dialog.component';
 
 @Injectable()
 export class CheckoutResolvePagingParams implements Resolve<any> {
 
-    constructor(private paginationUtil: JhiPaginationUtil, private service: CheckoutService) {}
+    constructor(private paginationUtil: JhiPaginationUtil) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
         const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
-        const id = route.params['id'] ? route.params['id'] : null;
-        if (id) {
-            return this.service.find(id);
-        }
         return {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort)
-        };
+      };
     }
 }
 
@@ -43,44 +37,37 @@ export const checkoutRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }, {
-        path: 'checkout/:id/view',
-        resolve: {
-            checkout: CheckoutResolvePagingParams
-        },
+        path: 'checkout/:id',
         component: CheckoutDetailComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'appDoraApp.checkout.home.title'
         },
         canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'checkout/new',
-        component: CheckoutDialogComponent,
-        resolve: {
-            checkout: CheckoutResolvePagingParams
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'appDoraApp.checkout.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-    },
-    {
-        path: 'checkout/:id/edit',
-        component: CheckoutDialogComponent,
-        resolve: {
-            checkout: CheckoutResolvePagingParams
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'appDoraApp.checkout.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-    },
+    }
 ];
 
 export const checkoutPopupRoute: Routes = [
+    {
+        path: 'checkout-new',
+        component: CheckoutPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'appDoraApp.checkout.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'checkout/:id/edit',
+        component: CheckoutPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'appDoraApp.checkout.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
     {
         path: 'checkout/:id/delete',
         component: CheckoutDeletePopupComponent,

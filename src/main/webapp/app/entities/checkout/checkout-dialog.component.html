@@ -1,33 +1,55 @@
-<div>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'appDoraApp.produto.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <span class="fa fa-search"></span>
-                    </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <span class="fa fa-trash-o"></span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <br/>
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div *ngIf="produtos">
-        <div *ngFor="let produto of produtos ;trackBy: trackId">
-            <p-card title="{{produto.nome}}" subtitle="{{produto.categoriaDTO.nome}}" [style]="{width: '360px'}" styleClass="ui-card-shadow">
-                <!--<p-header>
-                    <img src="Card" src="assets/showcase/images/usercard.png">
-                </p-header>-->
-                <div>{{produto.preco}}</div>
-                <p-footer>
-                    <button pButton type="button" label="Adicionar" icon="fa fa-plus-circle"></button>
-                </p-footer>
-            </p-card>
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCheckoutLabel" jhiTranslate="appDoraApp.checkout.home.createOrEditLabel">Create or edit a Checkout</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!checkout.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="checkout.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.desconto" for="field_desconto">Desconto</label>
+            <input type="number" class="form-control" name="desconto" id="field_desconto"
+                [(ngModel)]="checkout.desconto" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.precoTotal" for="field_precoTotal">Preco Total</label>
+            <input type="number" class="form-control" name="precoTotal" id="field_precoTotal"
+                [(ngModel)]="checkout.precoTotal" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.formaPagamento" for="field_formaPagamento">Forma Pagamento</label>
+            <select class="form-control" name="formaPagamento" [(ngModel)]="checkout.formaPagamento" id="field_formaPagamento" >
+                <option value="DINHEIRO">{{'appDoraApp.FormaDePagamento.DINHEIRO' | translate}}</option>
+                <option value="PARCELADO">{{'appDoraApp.FormaDePagamento.PARCELADO' | translate}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="appDoraApp.checkout.cliente" for="field_cliente">Cliente</label>
+            <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="checkout.clienteId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="clienteOption.id" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="appDoraApp.checkout.itensCheckout" for="field_itensCheckout">Itens Checkout</label>
+            <select class="form-control" id="field_itensCheckout" multiple name="itensCheckout" [(ngModel)]="checkout.itensCheckouts">
+                <option [ngValue]="getSelected(checkout.itensCheckouts, itensCheckoutOption)" *ngFor="let itensCheckoutOption of itenscheckouts; trackBy: trackItensCheckoutById">{{itensCheckoutOption.id}}</option>
+            </select>
         </div>
     </div>
-</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

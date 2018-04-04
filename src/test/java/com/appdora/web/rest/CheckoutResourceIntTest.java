@@ -39,6 +39,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.appdora.domain.enumeration.FormaDePagamento;
 /**
  * Test class for the CheckoutResource REST controller.
  *
@@ -51,11 +52,14 @@ public class CheckoutResourceIntTest {
     private static final ZonedDateTime DEFAULT_DATA_HORA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_DATA_HORA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final Integer DEFAULT_QUANTIDADE = 1;
-    private static final Integer UPDATED_QUANTIDADE = 2;
-
     private static final BigDecimal DEFAULT_DESCONTO = new BigDecimal(1);
     private static final BigDecimal UPDATED_DESCONTO = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_PRECO_TOTAL = new BigDecimal(1);
+    private static final BigDecimal UPDATED_PRECO_TOTAL = new BigDecimal(2);
+
+    private static final FormaDePagamento DEFAULT_FORMA_PAGAMENTO = FormaDePagamento.DINHEIRO;
+    private static final FormaDePagamento UPDATED_FORMA_PAGAMENTO = FormaDePagamento.PARCELADO;
 
     @Autowired
     private CheckoutRepository checkoutRepository;
@@ -105,8 +109,9 @@ public class CheckoutResourceIntTest {
     public static Checkout createEntity(EntityManager em) {
         Checkout checkout = new Checkout()
             .dataHora(DEFAULT_DATA_HORA)
-            .quantidade(DEFAULT_QUANTIDADE)
-            .desconto(DEFAULT_DESCONTO);
+            .desconto(DEFAULT_DESCONTO)
+            .precoTotal(DEFAULT_PRECO_TOTAL)
+            .formaPagamento(DEFAULT_FORMA_PAGAMENTO);
         return checkout;
     }
 
@@ -116,6 +121,7 @@ public class CheckoutResourceIntTest {
         checkout = createEntity(em);
     }
 
+    @Test
     @Transactional
     public void createCheckout() throws Exception {
         int databaseSizeBeforeCreate = checkoutRepository.findAll().size();
@@ -132,8 +138,9 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeCreate + 1);
         Checkout testCheckout = checkoutList.get(checkoutList.size() - 1);
         assertThat(testCheckout.getDataHora()).isEqualTo(DEFAULT_DATA_HORA);
-        assertThat(testCheckout.getQuantidade()).isEqualTo(DEFAULT_QUANTIDADE);
         assertThat(testCheckout.getDesconto()).isEqualTo(DEFAULT_DESCONTO);
+        assertThat(testCheckout.getPrecoTotal()).isEqualTo(DEFAULT_PRECO_TOTAL);
+        assertThat(testCheckout.getFormaPagamento()).isEqualTo(DEFAULT_FORMA_PAGAMENTO);
 
         // Validate the Checkout in Elasticsearch
         Checkout checkoutEs = checkoutSearchRepository.findOne(testCheckout.getId());
@@ -161,6 +168,7 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeCreate);
     }
 
+    @Test
     @Transactional
     public void checkDataHoraIsRequired() throws Exception {
         int databaseSizeBeforeTest = checkoutRepository.findAll().size();
@@ -179,6 +187,7 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeTest);
     }
 
+    @Test
     @Transactional
     public void getAllCheckouts() throws Exception {
         // Initialize the database
@@ -190,10 +199,12 @@ public class CheckoutResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(checkout.getId().intValue())))
             .andExpect(jsonPath("$.[*].dataHora").value(hasItem(sameInstant(DEFAULT_DATA_HORA))))
-            .andExpect(jsonPath("$.[*].quantidade").value(hasItem(DEFAULT_QUANTIDADE)))
-            .andExpect(jsonPath("$.[*].desconto").value(hasItem(DEFAULT_DESCONTO.intValue())));
+            .andExpect(jsonPath("$.[*].desconto").value(hasItem(DEFAULT_DESCONTO.intValue())))
+            .andExpect(jsonPath("$.[*].precoTotal").value(hasItem(DEFAULT_PRECO_TOTAL.intValue())))
+            .andExpect(jsonPath("$.[*].formaPagamento").value(hasItem(DEFAULT_FORMA_PAGAMENTO.toString())));
     }
 
+    @Test
     @Transactional
     public void getCheckout() throws Exception {
         // Initialize the database
@@ -205,8 +216,9 @@ public class CheckoutResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(checkout.getId().intValue()))
             .andExpect(jsonPath("$.dataHora").value(sameInstant(DEFAULT_DATA_HORA)))
-            .andExpect(jsonPath("$.quantidade").value(DEFAULT_QUANTIDADE))
-            .andExpect(jsonPath("$.desconto").value(DEFAULT_DESCONTO.intValue()));
+            .andExpect(jsonPath("$.desconto").value(DEFAULT_DESCONTO.intValue()))
+            .andExpect(jsonPath("$.precoTotal").value(DEFAULT_PRECO_TOTAL.intValue()))
+            .andExpect(jsonPath("$.formaPagamento").value(DEFAULT_FORMA_PAGAMENTO.toString()));
     }
 
     @Test
@@ -217,6 +229,7 @@ public class CheckoutResourceIntTest {
             .andExpect(status().isNotFound());
     }
 
+    @Test
     @Transactional
     public void updateCheckout() throws Exception {
         // Initialize the database
@@ -230,8 +243,9 @@ public class CheckoutResourceIntTest {
         em.detach(updatedCheckout);
         updatedCheckout
             .dataHora(UPDATED_DATA_HORA)
-            .quantidade(UPDATED_QUANTIDADE)
-            .desconto(UPDATED_DESCONTO);
+            .desconto(UPDATED_DESCONTO)
+            .precoTotal(UPDATED_PRECO_TOTAL)
+            .formaPagamento(UPDATED_FORMA_PAGAMENTO);
         CheckoutDTO checkoutDTO = checkoutMapper.toDto(updatedCheckout);
 
         restCheckoutMockMvc.perform(put("/api/checkouts")
@@ -244,8 +258,9 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeUpdate);
         Checkout testCheckout = checkoutList.get(checkoutList.size() - 1);
         assertThat(testCheckout.getDataHora()).isEqualTo(UPDATED_DATA_HORA);
-        assertThat(testCheckout.getQuantidade()).isEqualTo(UPDATED_QUANTIDADE);
         assertThat(testCheckout.getDesconto()).isEqualTo(UPDATED_DESCONTO);
+        assertThat(testCheckout.getPrecoTotal()).isEqualTo(UPDATED_PRECO_TOTAL);
+        assertThat(testCheckout.getFormaPagamento()).isEqualTo(UPDATED_FORMA_PAGAMENTO);
 
         // Validate the Checkout in Elasticsearch
         Checkout checkoutEs = checkoutSearchRepository.findOne(testCheckout.getId());
@@ -253,6 +268,7 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutEs).isEqualToIgnoringGivenFields(testCheckout, "dataHora");
     }
 
+    @Test
     @Transactional
     public void updateNonExistingCheckout() throws Exception {
         int databaseSizeBeforeUpdate = checkoutRepository.findAll().size();
@@ -293,6 +309,7 @@ public class CheckoutResourceIntTest {
         assertThat(checkoutList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
+    @Test
     @Transactional
     public void searchCheckout() throws Exception {
         // Initialize the database
@@ -305,10 +322,12 @@ public class CheckoutResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(checkout.getId().intValue())))
             .andExpect(jsonPath("$.[*].dataHora").value(hasItem(sameInstant(DEFAULT_DATA_HORA))))
-            .andExpect(jsonPath("$.[*].quantidade").value(hasItem(DEFAULT_QUANTIDADE)))
-            .andExpect(jsonPath("$.[*].desconto").value(hasItem(DEFAULT_DESCONTO.intValue())));
+            .andExpect(jsonPath("$.[*].desconto").value(hasItem(DEFAULT_DESCONTO.intValue())))
+            .andExpect(jsonPath("$.[*].precoTotal").value(hasItem(DEFAULT_PRECO_TOTAL.intValue())))
+            .andExpect(jsonPath("$.[*].formaPagamento").value(hasItem(DEFAULT_FORMA_PAGAMENTO.toString())));
     }
 
+    @Test
     @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Checkout.class);

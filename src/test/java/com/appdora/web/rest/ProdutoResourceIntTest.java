@@ -111,6 +111,7 @@ public class ProdutoResourceIntTest {
         produto = createEntity(em);
     }
 
+    @Test
     @Transactional
     public void createProduto() throws Exception {
         int databaseSizeBeforeCreate = produtoRepository.findAll().size();
@@ -174,6 +175,7 @@ public class ProdutoResourceIntTest {
         assertThat(produtoList).hasSize(databaseSizeBeforeTest);
     }
 
+    @Test
     @Transactional
     public void getAllProdutos() throws Exception {
         // Initialize the database
@@ -213,6 +215,7 @@ public class ProdutoResourceIntTest {
             .andExpect(status().isNotFound());
     }
 
+    @Test
     @Transactional
     public void updateProduto() throws Exception {
         // Initialize the database
@@ -248,6 +251,7 @@ public class ProdutoResourceIntTest {
         assertThat(produtoEs).isEqualToIgnoringGivenFields(testProduto);
     }
 
+    @Test
     @Transactional
     public void updateNonExistingProduto() throws Exception {
         int databaseSizeBeforeUpdate = produtoRepository.findAll().size();
@@ -288,6 +292,7 @@ public class ProdutoResourceIntTest {
         assertThat(produtoList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
+    @Test
     @Transactional
     public void searchProduto() throws Exception {
         // Initialize the database
@@ -304,6 +309,7 @@ public class ProdutoResourceIntTest {
             .andExpect(jsonPath("$.[*].preco").value(hasItem(DEFAULT_PRECO.intValue())));
     }
 
+    @Test
     @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Produto.class);

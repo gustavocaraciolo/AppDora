@@ -13,10 +13,10 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface CheckoutRepository extends JpaRepository<Checkout, Long> {
-    @Query("select distinct checkout from Checkout checkout left join fetch checkout.produtos")
+    @Query("select distinct checkout from Checkout checkout left join fetch checkout.itensCheckouts")
     List<Checkout> findAllWithEagerRelationships();
 
-    @Query("select checkout from Checkout checkout left join fetch checkout.produtos where checkout.id =:id")
+    @Query("select checkout from Checkout checkout left join fetch checkout.itensCheckouts where checkout.id =:id")
     Checkout findOneWithEagerRelationships(@Param("id") Long id);
 
 }

@@ -10,7 +10,6 @@ import { ProdutoDialogComponent } from '../../../../../../main/webapp/app/entiti
 import { ProdutoService } from '../../../../../../main/webapp/app/entities/produto/produto.service';
 import { Produto } from '../../../../../../main/webapp/app/entities/produto/produto.model';
 import { CategoriaService } from '../../../../../../main/webapp/app/entities/categoria';
-import { CheckoutService } from '../../../../../../main/webapp/app/entities/checkout';
 
 describe('Component Tests', () => {
 
@@ -27,7 +26,6 @@ describe('Component Tests', () => {
                 declarations: [ProdutoDialogComponent],
                 providers: [
                     CategoriaService,
-                    CheckoutService,
                     ProdutoService
                 ]
             })

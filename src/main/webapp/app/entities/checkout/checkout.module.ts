@@ -9,9 +9,11 @@ import { ConfirmDialogModule } from 'primeng/primeng';
 
 import {
     CheckoutService,
+    CheckoutPopupService,
     CheckoutComponent,
     CheckoutDetailComponent,
     CheckoutDialogComponent,
+    CheckoutPopupComponent,
     CheckoutDeletePopupComponent,
     CheckoutDeleteDialogComponent,
     checkoutRoute,
@@ -38,16 +40,19 @@ const ENTITY_STATES = [
         CheckoutDetailComponent,
         CheckoutDialogComponent,
         CheckoutDeleteDialogComponent,
+        CheckoutPopupComponent,
         CheckoutDeletePopupComponent,
     ],
     entryComponents: [
         CheckoutComponent,
         CheckoutDialogComponent,
+        CheckoutPopupComponent,
         CheckoutDeleteDialogComponent,
         CheckoutDeletePopupComponent,
     ],
     providers: [
         CheckoutService,
+        CheckoutPopupService,
         CheckoutResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

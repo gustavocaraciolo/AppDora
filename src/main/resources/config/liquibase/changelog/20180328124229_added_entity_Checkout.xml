@@ -26,11 +26,15 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="quantidade" type="integer">
+            <column name="desconto" type="decimal(10,2)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="desconto" type="decimal(10,2)">
+            <column name="preco_total" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="forma_pagamento" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -42,8 +46,8 @@
         </createTable>
         <dropDefaultValue tableName="checkout" columnName="data_hora" columnDataType="datetime"/>
         
-        <createTable tableName="checkout_produto">
-            <column name="produtos_id" type="bigint">
+        <createTable tableName="checkout_itens_checkout">
+            <column name="itens_checkouts_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="checkouts_id" type="bigint">
@@ -51,7 +55,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="checkouts_id, produtos_id" tableName="checkout_produto"/>
+        <addPrimaryKey columnNames="checkouts_id, itens_checkouts_id" tableName="checkout_itens_checkout"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

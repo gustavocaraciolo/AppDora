@@ -8,13 +8,17 @@
         <dd>
             <span>{{checkout.dataHora | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="appDoraApp.checkout.quantidade">Quantidade</span></dt>
-        <dd>
-            <span>{{checkout.quantidade}}</span>
-        </dd>
         <dt><span jhiTranslate="appDoraApp.checkout.desconto">Desconto</span></dt>
         <dd>
             <span>{{checkout.desconto}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.checkout.precoTotal">Preco Total</span></dt>
+        <dd>
+            <span>{{checkout.precoTotal}}</span>
+        </dd>
+        <dt><span jhiTranslate="appDoraApp.checkout.formaPagamento">Forma Pagamento</span></dt>
+        <dd>
+            <span jhiTranslate="{{'appDoraApp.FormaDePagamento.' + checkout.formaPagamento}}">{{checkout.formaPagamento}}</span>
         </dd>
         <dt><span jhiTranslate="appDoraApp.checkout.cliente">Cliente</span></dt>
         <dd>
@@ -22,10 +26,10 @@
                 <a [routerLink]="['/cliente', checkout.clienteId]">{{checkout.clienteId}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="appDoraApp.checkout.produto">Produto</span></dt>
+        <dt><span jhiTranslate="appDoraApp.checkout.itensCheckout">Itens Checkout</span></dt>
         <dd>
-            <span *ngFor="let produto of checkout.produtos; let last = last">
-                <a [routerLink]="['/produto', produto?.id ]">{{produto.id}}</a>{{last ? '' : ', '}}
+            <span *ngFor="let itensCheckout of checkout.itensCheckouts; let last = last">
+                <a [routerLink]="['/itens-checkout', itensCheckout?.id ]">{{itensCheckout.id}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
     </dl>

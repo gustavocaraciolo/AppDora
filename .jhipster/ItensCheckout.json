@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "produto",
+            "otherEntityName": "produto",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "checkout",
+            "otherEntityName": "checkout",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "itensCheckout"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "quantidade",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180404002447",
+    "entityTableName": "itens_checkout",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

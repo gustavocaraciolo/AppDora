@@ -15,15 +15,15 @@
                                  referencedTableName="cliente"/>
 
         <addForeignKeyConstraint baseColumnNames="checkouts_id"
-                                 baseTableName="checkout_produto"
-                                 constraintName="fk_checkout_produto_checkouts_id"
+                                 baseTableName="checkout_itens_checkout"
+                                 constraintName="fk_checkout_itens_checkout_checkouts_id"
                                  referencedColumnNames="id"
                                  referencedTableName="checkout"/>
-        <addForeignKeyConstraint baseColumnNames="produtos_id"
-                                 baseTableName="checkout_produto"
-                                 constraintName="fk_checkout_produto_produtos_id"
+        <addForeignKeyConstraint baseColumnNames="itens_checkouts_id"
+                                 baseTableName="checkout_itens_checkout"
+                                 constraintName="fk_checkout_itens_checkout_itens_checkouts_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="produto"/>
+                                 referencedTableName="itens_checkout"/>
         
     </changeSet>
 </databaseChangeLog>

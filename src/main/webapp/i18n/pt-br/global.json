@@ -98,6 +98,7 @@
                 "cliente": "Cliente",
                 "tag": "Tag",
                 "vendas": "Vendas",
+                "itensCheckout": "Itens Checkout",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

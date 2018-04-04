@@ -42,10 +42,10 @@ public class Produto implements Serializable {
     @ManyToOne
     private Categoria categoria;
 
-    @ManyToMany(mappedBy = "produtos")
+    @OneToMany(mappedBy = "produto")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Checkout> checkouts = new HashSet<>();
+    private Set<ItensCheckout> itensCheckouts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -108,29 +108,29 @@ public class Produto implements Serializable {
         this.categoria = categoria;
     }
 
-    public Set<Checkout> getCheckouts() {
-        return checkouts;
+    public Set<ItensCheckout> getItensCheckouts() {
+        return itensCheckouts;
     }
 
-    public Produto checkouts(Set<Checkout> checkouts) {
-        this.checkouts = checkouts;
+    public Produto itensCheckouts(Set<ItensCheckout> itensCheckouts) {
+        this.itensCheckouts = itensCheckouts;
         return this;
     }
 
-    public Produto addCheckout(Checkout checkout) {
-        this.checkouts.add(checkout);
-        checkout.getProdutos().add(this);
+    public Produto addItensCheckout(ItensCheckout itensCheckout) {
+        this.itensCheckouts.add(itensCheckout);
+        itensCheckout.setProduto(this);
         return this;
     }
 
-    public Produto removeCheckout(Checkout checkout) {
-        this.checkouts.remove(checkout);
-        checkout.getProdutos().remove(this);
+    public Produto removeItensCheckout(ItensCheckout itensCheckout) {
+        this.itensCheckouts.remove(itensCheckout);
+        itensCheckout.setProduto(null);
         return this;
     }
 
-    public void setCheckouts(Set<Checkout> checkouts) {
-        this.checkouts = checkouts;
+    public void setItensCheckouts(Set<ItensCheckout> itensCheckouts) {
+        this.itensCheckouts = itensCheckouts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

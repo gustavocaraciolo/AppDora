@@ -57,7 +57,7 @@ public class CheckoutServiceImpl implements CheckoutService {
     public CheckoutDTO save(CheckoutDTO checkoutDTO) {
         log.debug("Request to save Checkout : {}", checkoutDTO);
         Cliente cliente = clienteRepository.findOne(checkoutDTO.getClienteId());
-        checkoutDTO.setDesconto(RandomUtil.formatMoedaToBigdecimal(checkoutDTO.getDesconto()));
+        //checkoutDTO.setDesconto(RandomUtil.formatMoedaToBigdecimal(checkoutDTO.getDesconto()));
         checkoutDTO.setClienteDTO(clienteMapper.toDto(cliente));
         Checkout checkout = checkoutMapper.toEntity(checkoutDTO);
         checkout = checkoutRepository.save(checkout);

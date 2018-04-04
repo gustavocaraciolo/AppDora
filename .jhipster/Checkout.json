@@ -10,8 +10,8 @@
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "checkout",
-            "relationshipName": "produto",
-            "otherEntityName": "produto",
+            "relationshipName": "itensCheckout",
+            "otherEntityName": "itensCheckout",
             "otherEntityField": "id",
             "ownerSide": true
         }
@@ -25,12 +25,17 @@
             ]
         },
         {
-            "fieldName": "quantidade",
-            "fieldType": "Integer"
-        },
-        {
             "fieldName": "desconto",
             "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "precoTotal",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "formaPagamento",
+            "fieldType": "FormaDePagamento",
+            "fieldValues": "DINHEIRO,PARCELADO"
         }
     ],
     "changelogDate": "20180328124229",
