@@ -1,5 +1,20 @@
 <!--INÍCIO DO MENU -->
 <div class="row">
+    <div class="col-sm-12">
+        <form name="searchForm" class="form-inline">
+            <div class="input-group w-100 mt-3">
+                <input type="text" class="form-control" [(ngModel)]="currentSearch" (keyup)="search(currentSearch)" id="currentSearch" name="currentSearch">
+                <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                    <span class="fa fa-search"></span>
+                </button>
+                <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                    <span class="fa fa-trash-o"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-9 col-xs-12">
 
         <jhi-carrinho-vendas-item

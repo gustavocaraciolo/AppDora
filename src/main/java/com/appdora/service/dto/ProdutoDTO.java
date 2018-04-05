@@ -20,7 +20,7 @@ public class ProdutoDTO implements Serializable {
 
     private Integer quantidade;
 
-    private BigDecimal preco;
+    private String preco;
 
     private Long categoriaId;
 
@@ -28,7 +28,7 @@ public class ProdutoDTO implements Serializable {
 
     public ProdutoDTO(){}
 
-    public ProdutoDTO(String nome, Integer quantidade, BigDecimal preco, Long categoriaId) {
+    public ProdutoDTO(String nome, Integer quantidade, String preco, Long categoriaId) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.preco = preco;
@@ -59,11 +59,11 @@ public class ProdutoDTO implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public BigDecimal getPreco() {
+    public String getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
     }
 

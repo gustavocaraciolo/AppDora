@@ -2,6 +2,7 @@ package com.appdora.bootstrap;
 
 import com.appdora.domain.*;
 import com.appdora.repository.*;
+import com.appdora.repository.search.ProdutoSearchRepository;
 import com.appdora.service.ClienteService;
 import com.appdora.service.dto.*;
 import com.appdora.service.mapper.*;
@@ -33,8 +34,9 @@ DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final CategoriaMapper categoriaMapper;
     private final ProdutoMapper produtoMapper;
     private final CheckoutMapper checkoutMapper;
+    private final ProdutoSearchRepository produtoSearchRepository;
 
-    public DoraBootstrap(CheckoutRepository checkoutRepository, ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, UserRepository userRepository, ClienteService clienteService, TagRepository tagRepository, TagMapper tagMapper, ClienteMapper clienteMapper, CategoriaMapper categoriaMapper, ProdutoMapper produtoMapper, CheckoutMapper checkoutMapper) {
+    public DoraBootstrap(CheckoutRepository checkoutRepository, ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, UserRepository userRepository, ClienteService clienteService, TagRepository tagRepository, TagMapper tagMapper, ClienteMapper clienteMapper, CategoriaMapper categoriaMapper, ProdutoMapper produtoMapper, CheckoutMapper checkoutMapper, ProdutoSearchRepository produtoSearchRepository) {
         this.checkoutRepository = checkoutRepository;
         this.produtoRepository = produtoRepository;
         this.categoriaRepository = categoriaRepository;
@@ -46,6 +48,7 @@ DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
         this.categoriaMapper = categoriaMapper;
         this.produtoMapper = produtoMapper;
         this.checkoutMapper = checkoutMapper;
+        this.produtoSearchRepository = produtoSearchRepository;
     }
 
     List<Categoria> categorias = new ArrayList<>();
@@ -68,7 +71,12 @@ DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private void loadCheckout(){
         List<CheckoutDTO> checkoutDTOS = new ArrayList<>();
         Set<ProdutoDTO> listProduto = new LinkedHashSet<ProdutoDTO>(produtoMapper.toDto(this.produtos));
-
+        /*listProduto.add(new ProdutoDTO("Saia Mid", 20, "23", this.categorias.get(0).getId()));
+        listProduto.add(new ProdutoDTO("Macacao", 20, "67", this.categorias.get(0).getId()));
+        listProduto.add(new ProdutoDTO("Bermuda", 2, "32", this.categorias.get(2).getId()));
+        listProduto.add(new ProdutoDTO("Calça", 2, "3", this.categorias.get(1).getId()));
+        listProduto.add(new ProdutoDTO("Boné", 2, "12", this.categorias.get(1).getId()));
+        checkoutDTOS.add(new CheckoutDTO(2,"0.01",this.clientes.get(2).getId(),listProduto));*/
         List<Checkout> checkouts = checkoutMapper.toEntity(checkoutDTOS);
         checkoutRepository.save(checkouts);
         //this.checkouts = checkouts;
@@ -76,9 +84,14 @@ DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private void loadProduto(){
         List<ProdutoDTO> produtoDTOS = new ArrayList<>();
-
+        produtoDTOS.add(new ProdutoDTO("Saia Mid", 20, "23",this.categorias.get(0).getId()));
+        produtoDTOS.add(new ProdutoDTO("Macacao", 20, "67", this.categorias.get(0).getId()));
+        produtoDTOS.add(new ProdutoDTO("Bermuda", 2, "32", this.categorias.get(2).getId()));
+        produtoDTOS.add(new ProdutoDTO("Calça", 2, "3", this.categorias.get(1).getId()));
+        produtoDTOS.add(new ProdutoDTO("Boné", 2, "12", this.categorias.get(1).getId()));
         List<Produto> produtos = produtoMapper.toEntity(produtoDTOS);
         produtoRepository.save(produtos);
+        produtoSearchRepository.save(produtos);
         this.produtos = produtos;
     }
 

@@ -47,7 +47,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public ProdutoDTO save(ProdutoDTO produtoDTO) {
         log.debug("Request to save Produto : {}", produtoDTO);
-        //produtoDTO.setPreco(RandomUtil.formatMoedaToBigdecimal(produtoDTO.getPreco()));
+        produtoDTO.setPreco(RandomUtil.formatMoedaToBigdecimal(produtoDTO.getPreco()));
         Produto produto = produtoMapper.toEntity(produtoDTO);
         produto = produtoRepository.save(produto);
         ProdutoDTO result = produtoMapper.toDto(produto);
@@ -106,7 +106,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Transactional(readOnly = true)
     public Page<ProdutoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Produtos for query {}", query);
-        Page<Produto> result = produtoSearchRepository.search(queryStringQuery(query), pageable);
+        Page<Produto> result = produtoSearchRepository.search(queryStringQuery("*"+query+"*"), pageable);
         return result.map(produtoMapper::toDto);
     }
 }

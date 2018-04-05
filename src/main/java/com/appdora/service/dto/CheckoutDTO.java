@@ -21,7 +21,7 @@ public class CheckoutDTO implements Serializable {
 
     private BigDecimal desconto;
 
-    private BigDecimal precoTotal;
+    private String precoTotal;
 
     private FormaDePagamento formaPagamento;
 
@@ -55,11 +55,11 @@ public class CheckoutDTO implements Serializable {
         this.desconto = desconto;
     }
 
-    public BigDecimal getPrecoTotal() {
+    public String getPrecoTotal() {
         return precoTotal;
     }
 
-    public void setPrecoTotal(BigDecimal precoTotal) {
+    public void setPrecoTotal(String precoTotal) {
         this.precoTotal = precoTotal;
     }
 
