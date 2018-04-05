@@ -9,8 +9,8 @@ import { ConfirmDialogModule } from 'primeng/primeng';
 
 import {
     CheckoutService,
-    CheckoutPopupService,
     CheckoutComponent,
+    CheckoutPopupService,
     CheckoutDetailComponent,
     CheckoutDialogComponent,
     CheckoutPopupComponent,

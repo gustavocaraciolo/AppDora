@@ -5,6 +5,7 @@ import com.appdora.domain.Authority;
 import com.appdora.domain.User;
 import com.appdora.repository.AuthorityRepository;
 import com.appdora.repository.UserRepository;
+import com.appdora.repository.search.UserSearchRepository;
 import com.appdora.security.AuthoritiesConstants;
 import com.appdora.service.ClienteService;
 import com.appdora.domain.Cliente;
@@ -48,13 +49,16 @@ public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteSearchRepository clienteSearchRepository;
 
+    private final UserSearchRepository userSearchRepository;
+
     private final PasswordEncoder passwordEncoder;
 
-    public ClienteServiceImpl(ClienteRepository clienteRepository, ClienteMapper clienteMapper, UserRepository userRepository, ClienteSearchRepository clienteSearchRepository, PasswordEncoder passwordEncoder) {
+    public ClienteServiceImpl(ClienteRepository clienteRepository, ClienteMapper clienteMapper, UserRepository userRepository, ClienteSearchRepository clienteSearchRepository, UserSearchRepository userSearchRepository, PasswordEncoder passwordEncoder) {
         this.clienteRepository = clienteRepository;
         this.clienteMapper = clienteMapper;
         this.userRepository = userRepository;
         this.clienteSearchRepository = clienteSearchRepository;
+        this.userSearchRepository = userSearchRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -98,6 +102,7 @@ public class ClienteServiceImpl implements ClienteService {
         user.setResetDate(Instant.now());
         user.setActivated(true);
         user = userRepository.saveAndFlush(user);
+        userSearchRepository.save(user);
         clienteDTO.setUserId(user.getId());
         return user;
     }
@@ -168,7 +173,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Transactional(readOnly = true)
     public Page<ClienteDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Clientes for query {}", query);
-        Page<Cliente> result = clienteSearchRepository.search(queryStringQuery(query), pageable);
+        Page<Cliente> result = clienteSearchRepository.search(queryStringQuery("*"+query+"*"), pageable);
         return result.map(clienteMapper::toDto);
     }
 }

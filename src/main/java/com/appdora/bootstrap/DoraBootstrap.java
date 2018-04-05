@@ -3,6 +3,7 @@ package com.appdora.bootstrap;
 import com.appdora.domain.*;
 import com.appdora.repository.*;
 import com.appdora.repository.search.ProdutoSearchRepository;
+import com.appdora.repository.search.UserSearchRepository;
 import com.appdora.service.ClienteService;
 import com.appdora.service.dto.*;
 import com.appdora.service.mapper.*;
@@ -35,8 +36,9 @@ DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final ProdutoMapper produtoMapper;
     private final CheckoutMapper checkoutMapper;
     private final ProdutoSearchRepository produtoSearchRepository;
+    private final UserSearchRepository userSearchRepository;
 
-    public DoraBootstrap(CheckoutRepository checkoutRepository, ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, UserRepository userRepository, ClienteService clienteService, TagRepository tagRepository, TagMapper tagMapper, ClienteMapper clienteMapper, CategoriaMapper categoriaMapper, ProdutoMapper produtoMapper, CheckoutMapper checkoutMapper, ProdutoSearchRepository produtoSearchRepository) {
+    public DoraBootstrap(CheckoutRepository checkoutRepository, ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, UserRepository userRepository, ClienteService clienteService, TagRepository tagRepository, TagMapper tagMapper, ClienteMapper clienteMapper, CategoriaMapper categoriaMapper, ProdutoMapper produtoMapper, CheckoutMapper checkoutMapper, ProdutoSearchRepository produtoSearchRepository, UserSearchRepository userSearchRepository) {
         this.checkoutRepository = checkoutRepository;
         this.produtoRepository = produtoRepository;
         this.categoriaRepository = categoriaRepository;
@@ -49,6 +51,7 @@ DoraBootstrap implements ApplicationListener<ContextRefreshedEvent> {
         this.produtoMapper = produtoMapper;
         this.checkoutMapper = checkoutMapper;
         this.produtoSearchRepository = produtoSearchRepository;
+        this.userSearchRepository = userSearchRepository;
     }
 
     List<Categoria> categorias = new ArrayList<>();
