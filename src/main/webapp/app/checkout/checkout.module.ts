@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {OrderModule} from "./order/order.module";
 import {OrderService} from "./order/order.service";
-
+import {SelectButtonModule} from 'primeng/selectbutton';
 @NgModule({
     imports: [
         CommonModule,
@@ -21,7 +21,8 @@ import {OrderService} from "./order/order.service";
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        OrderModule
+        OrderModule,
+        SelectButtonModule
     ],
     declarations: [CarrinhoItemComponent,
         CarrinhoFrameComponent,

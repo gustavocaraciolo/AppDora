@@ -11,6 +11,7 @@ import {CarrinhoFrameModel} from "../carrinho-frame/carrinho-frame.model";
 import {Cliente, ClienteService} from "../../entities/cliente";
 import {Checkout, CheckoutService} from "../../entities/checkout";
 import {ItensCheckout, ItensCheckoutService} from "../../entities/itens-checkout";
+import {FormaDePagamento} from "../../entities/checkout/checkout.model";
 
 @Component({
     selector: 'mt-order',
@@ -18,11 +19,11 @@ import {ItensCheckout, ItensCheckoutService} from "../../entities/itens-checkout
 })
 export class OrderComponent implements OnInit {
 
+    types: SelectItem[];
+
     msgs: Message[] = [];
 
     submitted: boolean;
-
-    address: string;
 
     clientes: Cliente[];
 
@@ -47,6 +48,11 @@ export class OrderComponent implements OnInit {
                 private clienteService: ClienteService,
                 private itensCheckoutService: ItensCheckoutService,
                 private eventManager: JhiEventManager) {
+        this.checkout = new Checkout();
+        this.types = [
+            {label: 'Dinheiro', value: 'DINHEIRO', icon: 'fa fa-fw fa-cc-paypal'},
+            {label: 'Parcelado', value: 'PARCELADO', icon: 'fa fa-fw fa-cc-visa'}
+        ];
     }
 
     ngOnInit() {
@@ -118,10 +124,14 @@ export class OrderComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.checkoutService.update(this.checkout));
         } else {
+            this.checkout.clienteId = this.selectedCliente.id;
             this.subscribeToSaveResponse(
                 this.checkoutService.create(this.checkout));
         }
+    }
 
+    public formaPagamentoEvent(obj:any){
+        this.checkout.formaPagamento = obj.value;
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<Checkout>>) {
