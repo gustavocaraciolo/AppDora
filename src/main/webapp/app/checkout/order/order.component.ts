@@ -6,17 +6,15 @@ import {Router} from '@angular/router'
 import {OrderService} from './order.service'
 
 import {Order, OrderItem} from "./order.model"
-import {CartItem} from "../carrinho/carrinho.model";
-import {RadioOption} from "../../../shared/radio/radio-option.model";
 import {Message, SelectItem} from "primeng/components/common/api";
-import {Cliente, ClienteService} from "../../cliente";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {JhiAlertService, JhiEventManager} from "ng-jhipster";
-import {Checkout} from "../../checkout/checkout.model";
-import {ItensCheckout, ItensCheckoutService} from "../../itens-checkout";
-import {CheckoutService} from "../../checkout/checkout.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Observable} from "rxjs/Observable";
+import {CarrinhoFrameModel} from "../carrinho-frame/carrinho-frame.model";
+import {Cliente, ClienteService} from "../../entities/cliente";
+import {Checkout, CheckoutService} from "../../entities/checkout";
+import {ItensCheckout, ItensCheckoutService} from "../../entities/itens-checkout";
 
 @Component({
     selector: 'mt-order',
@@ -70,25 +68,25 @@ export class OrderComponent implements OnInit {
         return this.orderService.itemsValue()
     }
 
-    cartItems(): CartItem[] {
+    cartItems(): CarrinhoFrameModel[] {
         return this.orderService.cartItems()
     }
 
-    increaseQty(item: CartItem) {
+    increaseQty(item: CarrinhoFrameModel) {
         this.orderService.increaseQty(item)
     }
 
-    decreaseQty(item: CartItem) {
+    decreaseQty(item: CarrinhoFrameModel) {
         this.orderService.decreaseQty(item)
     }
 
-    remove(item: CartItem) {
+    remove(item: CarrinhoFrameModel) {
         this.orderService.remove(item)
     }
 
     checkOrder(order: Order) {
         order.orderItems = this.cartItems()
-            .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.nome))
+            .map((item: CarrinhoFrameModel) => new OrderItem(item.quantity, item.produtoItem.nome))
         this.orderService.checkOrder(order)
             .subscribe((orderId: string) => {
                 this.router.navigate(['/order-summary'])

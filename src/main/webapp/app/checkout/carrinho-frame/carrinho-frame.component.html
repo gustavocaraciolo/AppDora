@@ -1,11 +1,9 @@
-<!--INICIO DO CARRINHO-->
 <div class="box box-solid">
     <div class="box-header">
         <i class="fa fa-shopping-cart"></i>
 
         <h3 class="box-title">Carrinho</h3>
     </div>
-    <!-- /.box-header -->
     <div class="box-body">
 
         <div *ngIf="!items().length">
@@ -17,7 +15,7 @@
             <table class="table">
                 <tbody>
                 <tr *ngFor="let item of items()" [@row]="rowState">
-                    <th>({{item.quantity}}x) {{item.menuItem.nome}}</th>
+                    <th>({{item.quantity}}x) {{item.produtoItem.nome}}</th>
                     <td class="text-right">{{item.value() | currency: 'BRL': true}}</td>
                     <td class="text-right">
                         <a (click)="removeItem(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
@@ -33,8 +31,7 @@
     <div class="box-footer" *ngIf="items().length">
         <div class="pull-right">
             <button (click)="clear()" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Limpar</button>
-            <a [routerLink]="['/order']" class="btn btn-success"><i class="fa fa-credit-card"></i> Fechar Pedido</a>
+            <a [routerLink]="['/pagamento']" class="btn btn-success"><i class="fa fa-credit-card"></i> Fechar Pedido</a>
         </div>
     </div>
 </div>
-<!-- FIM DO CARRINHO -->

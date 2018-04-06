@@ -21,10 +21,8 @@ import {APP_BASE_HREF} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {WizardModule} from 'primeng-extensions/components/wizard/wizard.js';
-import { AppDoraSharedModule } from '../../../shared';
 import {MultiSelectModule} from 'primeng/components/multiselect/multiselect';
 import {SelectButtonModule} from 'primeng/components/selectbutton/selectbutton';
-import {CheckoutComponent, CheckoutService} from "../../checkout";
 
 const ROUTES: Routes = [
     {path: '', component: OrderComponent}

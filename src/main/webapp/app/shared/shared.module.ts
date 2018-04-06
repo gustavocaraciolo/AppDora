@@ -18,11 +18,9 @@ import {
 } from './';
 import {SnackbarComponent} from "./messages/snackbar/snackbar.component";
 import {NotificationService} from "./messages/notification.service";
-import {CarrinhoService} from "../entities/vendas/carrinho/carrinho.service";
 import {RadioComponent} from "./radio/radio.component";
 import {InputComponent} from "./input/input.component";
 import {RatingComponent} from "./rating/rating.component";
-import {OrderService} from "../entities/vendas/order/order.service";
 
 @NgModule({
     imports: [
@@ -50,8 +48,6 @@ import {OrderService} from "../entities/vendas/order/order.service";
         UserService,
         DatePipe,
         NotificationService,
-        CarrinhoService,
-        OrderService,
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [

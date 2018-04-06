@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import {CartItem} from "./carrinho.model";
-import {Produto} from "../../produto";
-import {NotificationService} from "../../../shared/messages/notification.service";
+import {Produto} from "../../entities/produto";
+import {Injectable} from "@angular/core";
+import {NotificationService} from "../../shared/messages/notification.service";
+import {CarrinhoFrameModel} from "./carrinho-frame.model";
 
 @Injectable()
-export class CarrinhoService {
-    items: CartItem[] = []
+export class CarrinhoFrameService {
+    items: CarrinhoFrameModel[] = []
 
     constructor(private notificationService: NotificationService){}
 
@@ -14,29 +14,29 @@ export class CarrinhoService {
     }
 
     addItem(item:Produto){
-        let foundItem = this.items.find((mItem)=> mItem.menuItem.id === item.id)
+        let foundItem = this.items.find((mItem)=> mItem.produtoItem.id === item.id)
         if(foundItem){
             this.increaseQty(foundItem)
         }else{
-            this.items.push(new CartItem(item))
+            this.items.push(new CarrinhoFrameModel(item))
         }
         this.notificationService.notify(`Você adicionou o item ${item.nome}`)
     }
 
-    increaseQty(item: CartItem){
+    increaseQty(item: CarrinhoFrameModel){
         item.quantity = item.quantity + 1
     }
 
-    decreaseQty(item: CartItem){
+    decreaseQty(item: CarrinhoFrameModel){
         item.quantity = item.quantity - 1
         if (item.quantity === 0){
             this.removeItem(item)
         }
     }
 
-    removeItem(item:CartItem){
+    removeItem(item:CarrinhoFrameModel){
         this.items.splice(this.items.indexOf(item), 1)
-        this.notificationService.notify(`Você removeu o item ${item.menuItem.nome}`)
+        this.notificationService.notify(`Você removeu o item ${item.produtoItem.nome}`)
     }
 
     total(): number{

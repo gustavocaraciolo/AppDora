@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {trigger, state, style, transition, animate, keyframes} from '@angular/animations'
-import {CarrinhoService} from "./carrinho.service";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
+import {CarrinhoFrameService} from "./carrinho-frame.service";
 
 @Component({
-  selector: 'jhi-carrinho',
-  templateUrl: './carrinho.component.html',
+  selector: 'jhi-carrinho-frame',
+  templateUrl: './carrinho-frame.component.html',
     animations: [
         trigger('row', [
             state('ready', style({opacity: 1})),
@@ -21,11 +21,12 @@ import {CarrinhoService} from "./carrinho.service";
         ])
     ]
 })
-export class CarrinhoComponent implements OnInit {
+export class CarrinhoFrameComponent implements OnInit {
 
     rowState = 'ready'
 
-    constructor(private shoppingCartService: CarrinhoService) { }
+    constructor(private shoppingCartService: CarrinhoFrameService) {
+    }
 
     ngOnInit() {
     }
@@ -34,15 +35,15 @@ export class CarrinhoComponent implements OnInit {
         return this.shoppingCartService.items;
     }
 
-    clear(){
+    clear() {
         this.shoppingCartService.clear()
     }
 
-    removeItem(item: any){
+    removeItem(item: any) {
         this.shoppingCartService.removeItem(item)
     }
 
-    addItem(item: any){
+    addItem(item: any) {
         this.shoppingCartService.addItem(item)
     }
 

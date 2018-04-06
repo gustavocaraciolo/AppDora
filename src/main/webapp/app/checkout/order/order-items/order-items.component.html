@@ -17,9 +17,9 @@
         {{item.quantity}}
         <a (click)="emitIncreaseQty(item)" class="btn btn-sm"><i class="fa fa-plus"></i></a>
       </td>
-      <td>{{item.menuItem.name}}</td>
+      <td>{{item.produtoItem.name}}</td>
 
-      <td>{{item.menuItem.description}}</td>
+      <td>{{item.produtoItem.description}}</td>
       <td class="text-right">{{item.value() | currency: 'BRL': true}}</td>
       <td class="text-right">
         <a (click)="emitRemove(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>

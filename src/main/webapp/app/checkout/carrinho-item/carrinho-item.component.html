@@ -1,0 +1,8 @@
+<div class="menu-item-info-box" [@menuItemAppeared]="menuItemState">
+    <p-card title="{{produtoItem.nome}}" subtitle="{{produtoItem.categoriaDTO.nome}}" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+        <div>{{produtoItem.preco}}</div>
+        <p-footer>
+            <button (click)="emitAddEvent()" pButton type="button" label="Adicionar" icon="fa fa-plus-circle"></button>
+        </p-footer>
+    </p-card>
+</div>

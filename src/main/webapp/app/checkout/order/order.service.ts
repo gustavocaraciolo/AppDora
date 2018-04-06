@@ -7,32 +7,32 @@ import 'rxjs/add/operator/map'
 
 
 import {Order, OrderItem} from './order.model'
+import {CarrinhoFrameService} from "../carrinho-frame/carrinho-frame.service";
+import {CarrinhoFrameModel} from "../carrinho-frame/carrinho-frame.model";
 
-import {CartItem} from "../carrinho/carrinho.model";
-import {CarrinhoService} from "../carrinho/carrinho.service";
 
 @Injectable()
 export class OrderService {
 
-  constructor(private cartService: CarrinhoService, private http: Http){}
+  constructor(private cartService: CarrinhoFrameService, private http: Http){}
 
   itemsValue(): number {
     return this.cartService.total()
   }
 
-  cartItems(): CartItem[]{
+  cartItems(): CarrinhoFrameModel[]{
     return this.cartService.items
   }
 
-  increaseQty(item: CartItem){
+  increaseQty(item: CarrinhoFrameModel){
     this.cartService.increaseQty(item)
   }
 
-  decreaseQty(item: CartItem){
+  decreaseQty(item: CarrinhoFrameModel){
     this.cartService.decreaseQty(item)
   }
 
-  remove(item: CartItem){
+  remove(item: CarrinhoFrameModel){
     this.cartService.removeItem(item)
   }
 
