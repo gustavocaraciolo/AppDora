@@ -1,10 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, AbstractControl, FormControl} from '@angular/forms'
-
 import {Router} from '@angular/router'
-
 import {OrderService} from './order.service'
-
 import {Order, OrderItem} from "./order.model"
 import {Message, SelectItem} from "primeng/components/common/api";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
@@ -117,10 +113,14 @@ export class OrderComponent implements OnInit {
     }
 
     save() {
-        this.checkout.clienteId = this.selectedCliente.id;
         this.isSaving = true;
-        this.subscribeToSaveResponse(
-            this.checkoutService.create(this.checkout));
+        if (this.checkout.id !== undefined) {
+            this.subscribeToSaveResponse(
+                this.checkoutService.update(this.checkout));
+        } else {
+            this.subscribeToSaveResponse(
+                this.checkoutService.create(this.checkout));
+        }
 
     }
 

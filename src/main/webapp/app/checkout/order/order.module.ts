@@ -30,13 +30,12 @@ const ROUTES: Routes = [
 
 @NgModule({
     declarations: [OrderComponent, OrderItemsComponent, DeliveryCostsComponent],
-    imports: [SharedModule, RouterModule.forChild(ROUTES), FormsModule, ReactiveFormsModule, CommonModule,BrowserModule,
+    imports: [SharedModule, RouterModule.forChild(ROUTES), ReactiveFormsModule, CommonModule,BrowserModule,
         FormsModule,
         BrowserAnimationsModule,
         CheckboxModule,
         TriStateCheckboxModule,
         WizardModule,
-        ReactiveFormsModule,
         PanelModule,
         DropdownModule,
         InputTextModule,

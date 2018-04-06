@@ -37,6 +37,15 @@
                 </div>
             </div>
 
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Desconto :
+                </div>
+                <div class="ui-grid-col-2">
+                    <input type="number" class="form-control" name="desconto" id="field_desconto"
+                           [(ngModel)]="checkout.desconto" />
+                </div>
+            </div>
 
             <div class="ui-grid-row">
                 <mt-order-items [items]="cartItems()"
