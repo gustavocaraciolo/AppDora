@@ -1,9 +1,58 @@
 <div class="row">
     <div class="col-md-3">
-        <!--<span class="hipster img-fluid rounded"></span>-->
+        <span class="hipster img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-        <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
-        <a [routerLink]="['/carrinho']" class="btn btn-primary"></i> Realizar venda</a>
+        <!--<h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>-->
+        <div class="container margin_60">
+
+            <div class="main_title">
+                <h2>Bem vindo ao <span>AppDora </span></h2>
+                <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+            </div>
+
+            <div [ngSwitch]="isAuthenticated()">
+            <div class="row" *ngSwitchCase="true">
+                <a [routerLink]="['/carrinho']" class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="feature">
+                        <i class="icon_set_1_icon-30"></i>
+                        <h3><span>Realizar</span> Vendas</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        </p>
+                    </div>
+                </a>
+                <!--<div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
+                    <div class="feature">
+                        <i class="icon_set_1_icon-41"></i>
+                        <h3><span>+120</span> Premium city tours</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        </p>
+                    </div>
+                </div>-->
+            </div>
+            <!--<div class="row">
+                <div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="feature">
+                        <i class="icon_set_1_icon-57"></i>
+                        <h3><span>H24</span> Support</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
+                    <div class="feature">
+                        <i class="icon_set_1_icon-61"></i>
+                        <h3><span>10 Languages</span> available</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        </p>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        </div>
     </div>
 </div>
