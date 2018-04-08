@@ -39,7 +39,7 @@ export class OrderComponent implements OnInit {
 
     isSaving: boolean;
 
-    itenscheckouts: ItensCheckout[];
+    itenscheckouts: ItensCheckout[] = [];
 
     constructor(private orderService: OrderService,
                 private router: Router,
@@ -121,11 +121,19 @@ export class OrderComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.checkout.id !== undefined) {
-            this.subscribeToSaveResponse(
+            this.subscribeToSaveResponseCheckout(
                 this.checkoutService.update(this.checkout));
         } else {
+            for (const produto of this.cartItems()){
+                let itensCheckout = new ItensCheckout(null, produto.quantity, produto.quantity);
+                this.subscribeToSaveResponseItensCheckout(
+                    this.itensCheckoutService.create(itensCheckout));
+
+            }
+            this.checkout.itensCheckouts = this.itenscheckouts;
+            this.checkout.precoTotal = this.itemsValue();
             this.checkout.clienteId = this.selectedCliente.id;
-            this.subscribeToSaveResponse(
+            this.subscribeToSaveResponseCheckout(
                 this.checkoutService.create(this.checkout));
         }
     }
@@ -133,15 +141,25 @@ export class OrderComponent implements OnInit {
     public formaPagamentoEvent(obj:any){
         this.checkout.formaPagamento = obj.value;
     }
-
-    private subscribeToSaveResponse(result: Observable<HttpResponse<Checkout>>) {
-        result.subscribe((res: HttpResponse<Checkout>) =>
-            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
+    private subscribeToSaveResponseItensCheckout(result: Observable<HttpResponse<ItensCheckout>>) {
+        result.subscribe((res: HttpResponse<ItensCheckout>) =>{
+                this.itenscheckouts.push(res.body);
+            this.onSaveSuccessItensCheckout(res.body);
+            },
+            (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess(result: Checkout) {
+    private subscribeToSaveResponseCheckout(result: Observable<HttpResponse<Checkout>>) {
+        result.subscribe((res: HttpResponse<Checkout>) =>
+            this.onSaveSuccessCheckout(res.body), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    private onSaveSuccessCheckout(result: Checkout) {
         this.eventManager.broadcast({ name: 'checkoutListModification', content: 'OK'});
-        this.isSaving = false;
+    }
+
+    private onSaveSuccessItensCheckout(result: ItensCheckout) {
+        this.eventManager.broadcast({ name: 'checkoutListModification', content: 'OK'});
     }
 
     private onSaveError() {
