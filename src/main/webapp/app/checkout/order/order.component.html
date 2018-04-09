@@ -1,24 +1,4 @@
-<!--
-<div class="row">
-  <div class="col-xs-12">
-    <p class="lead">Itens do Pedido:</p>
-  </div>
-
-  <mt-order-items [items]="cartItems()"
-        (increaseQty)="increaseQty($event)"
-        (decreaseQty)="decreaseQty($event)"
-        (remove)="remove($event)"></mt-order-items>
-
-</div>
-
-  <div class="col-sm-6 col-xs-12">
-    <p class="lead">Frete e Total:</p>
-
-    <mt-delivery-costs
-      [delivery]="delivery"
-      [itemsValue]="itemsValue()"></mt-delivery-costs>
-  </div>-->
-<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+<!--<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
     <p-panel header="Finalizar Venda">
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
             <div class="ui-grid-row">
@@ -82,5 +62,71 @@
         </div>
     </p-panel>
 </form>
-<p-growl [value]="msgs"></p-growl>
+<p-growl [value]="msgs"></p-growl>-->
 
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <p-panel header="Finalizar Venda">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Cliente *:
+                </div>
+                <div class="ui-grid-col-2">
+                    <p-dropdown name="customizedselect" required="true" [options]="clientesSelectItem"
+                                [(ngModel)]="selectedCliente"
+                                filter="filter" [autoWidth]="false">
+                        <ng-template let-cliente pTemplate="item">
+                            <div class="ui-helper-clearfix">
+                                <span class="country-text">{{cliente.label}}</span>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Forma de pagamento :
+                </div>
+                <div class="ui-grid-col-2">
+                    <p-selectButton [options]="types" required="true"
+                                    (onChange)="formaPagamentoEvent($event)"></p-selectButton>
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Desconto :
+                </div>
+                <div class="ui-grid-col-2">
+                    <input type="number" class="form-control" name="desconto" id="field_desconto"
+                           [(ngModel)]="checkout.desconto"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="ui-grid-row">
+                    <mt-order-items [items]="cartItems()"
+                                    (increaseQty)="increaseQty($event)"
+                                    (decreaseQty)="decreaseQty($event)"
+                                    (remove)="remove($event)"></mt-order-items>
+
+                </div>
+                <div>
+                    <mt-delivery-costs
+                        [delivery]="delivery"
+                        [itemsValue]="itemsValue()"></mt-delivery-costs>
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2"></div>
+            <div class="ui-grid-col-6">
+                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <a [routerLink]="['/carrinho']"  ></a> Save
+                </button>
+            </div>
+            <div class="ui-grid-col-4"></div>
+        </div>
+    </p-panel>
+</form>

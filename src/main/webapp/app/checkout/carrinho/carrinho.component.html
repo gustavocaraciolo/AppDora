@@ -1,3 +1,4 @@
+<p-panel header="Produtos">
 <div class="row">
     <div class="col-sm-8">
         <form name="searchForm" class="form-inline" autocomplete="off">
@@ -15,15 +16,20 @@
 </div>
 </br>
 </br>
-<div class="row">
-    <div class="col-md-8 col-xs-12">
+
+
+    <div class="row">
+        <div class="col-md-8 add_bottom_15">
 
         <jhi-carrinho-item
             *ngFor="let item of produtos" [produtoItem]="item" (add)="shoppingCart.addItem($event)" ></jhi-carrinho-item>
+        </div>
 
+    <aside class="col-md-4" id="sidebar">
+        <div class="theiaStickySidebar">
+            <jhi-carrinho-frame #shoppingCart></jhi-carrinho-frame>
+        </div>
+    </aside>
     </div>
-    <div class="col-md-3 col-xs-12">
-        <jhi-carrinho-frame #shoppingCart></jhi-carrinho-frame>
-    </div>
-</div>
+</p-panel>
 

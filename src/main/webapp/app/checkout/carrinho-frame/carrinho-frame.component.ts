@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {CarrinhoFrameService} from "./carrinho-frame.service";
+import * as $ from 'jquery';
+import * as tes from "theia-sticky-sidebar/js/theia-sticky-sidebar.js"
 
 @Component({
   selector: 'jhi-carrinho-frame',
   templateUrl: './carrinho-frame.component.html',
+    styleUrls: [
+        '../../../content/css/style.css'
+    ],
     animations: [
         trigger('row', [
             state('ready', style({opacity: 1})),
@@ -29,6 +34,10 @@ export class CarrinhoFrameComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        $('#sidebar').tes({
+            additionalMarginTop: 80
+        });
     }
 
     items(): any[] {

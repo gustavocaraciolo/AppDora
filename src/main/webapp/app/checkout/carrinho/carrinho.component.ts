@@ -10,7 +10,9 @@ import {Principal} from "../../shared";
 @Component({
   selector: 'jhi-carrinho',
   templateUrl: './carrinho.component.html',
-  styles: []
+    styleUrls: [
+        '../../../content/css/style.css'
+    ]
 })
 export class CarrinhoComponent implements OnInit {
 

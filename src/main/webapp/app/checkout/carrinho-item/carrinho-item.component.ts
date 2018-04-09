@@ -6,6 +6,9 @@ import {Produto} from "../../entities/produto";
 @Component({
   selector: 'jhi-carrinho-item',
   templateUrl: './carrinho-item.component.html',
+    styleUrls: [
+        '../../../content/css/style.css'
+    ],
     animations: [
         trigger('menuItemAppeared', [
             state('ready', style({opacity: 1})),

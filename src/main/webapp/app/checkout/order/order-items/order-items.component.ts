@@ -5,7 +5,10 @@ import {CarrinhoFrameModel} from "../../carrinho-frame/carrinho-frame.model";
 
 @Component({
   selector: 'mt-order-items',
-  templateUrl: './order-items.component.html'
+  templateUrl: './order-items.component.html',
+    styleUrls: [
+        '../../../../content/css/style.css'
+    ]
 })
 export class OrderItemsComponent implements OnInit {
 

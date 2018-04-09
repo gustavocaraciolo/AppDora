@@ -1,4 +1,4 @@
-<div class="box box-solid">
+<!--<div class="box box-solid">
     <div class="box-header">
         <i class="fa fa-shopping-cart"></i>
 
@@ -34,4 +34,43 @@
             <a [routerLink]="['/pagamento']" class="btn btn-success"><i class="fa fa-credit-card"></i> Fechar Pedido</a>
         </div>
     </div>
-</div>
+</div>-->
+
+<p-panel header="Carrinho">
+
+    <div *ngIf="!items().length">
+        <p class="text-center">
+            Seu carrinho está vazio!
+        </p>
+    </div>
+
+    <div *ngIf="items().length">
+        <table class="table table_summary">
+            <tbody>
+            <tr *ngFor="let item of items()" [@row]="rowState">
+                <th>({{item.quantity}}x) {{item.produtoItem.nome}}</th>
+                <td class="text-right">{{item.value() | currency: 'BRL': true}}</td>
+                <td class="text-right">
+                    <a (click)="removeItem(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
+                </td>
+            </tr>
+            <tr class="total">
+                <td>Total:</td>
+                <td class="text-right">{{total() | currency: 'BRL': true}}</td>
+            </tr>
+            <!--<tr class="total">
+                <td>
+                    Total cost
+                </td>
+                <td class="text-right">
+                    $154
+                </td>
+            </tr>-->
+            </tbody>
+        </table>
+    </div>
+    <a [routerLink]="['/pagamento']" class="btn_full"><i class="fa fa-credit-card"></i> Fechar Pedido</a>
+    <!--<a class="btn_full" href="confirmation_fixed_sidebar.html">Book now</a>-->
+    <!--<a class="btn_full_outline" href="#"><i class="icon-right"></i> Continue shopping</a>-->
+</p-panel>
+

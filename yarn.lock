@@ -4415,7 +4415,7 @@ joi@^11.1.1:
     isemail "3.x.x"
     topo "2.x.x"
 
-"jquery@2 - 3":
+"jquery@2 - 3", jquery@>=1.7.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
@@ -8036,6 +8036,12 @@ tfunk@^3.0.1:
   dependencies:
     chalk "^1.1.1"
     object-path "^0.9.0"
+
+theia-sticky-sidebar@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/theia-sticky-sidebar/-/theia-sticky-sidebar-1.7.0.tgz#0fbb924e84eaff987368fd284d00caea7a7ec35a"
+  dependencies:
+    jquery ">=1.7.0"
 
 throttleit@^1.0.0:
   version "1.0.0"

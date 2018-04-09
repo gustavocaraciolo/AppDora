@@ -12,6 +12,9 @@ import { RouterModule } from '@angular/router';
 import {OrderModule} from "./order/order.module";
 import {OrderService} from "./order/order.service";
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {PanelModule} from 'primeng/components/panel/panel';
+import {InputTextModule} from 'primeng/inputtext';
+import { CompraRealizadaComponent } from './compra-realizada/compra-realizada.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -22,11 +25,14 @@ import {SelectButtonModule} from 'primeng/selectbutton';
         ReactiveFormsModule,
         RouterModule,
         OrderModule,
-        SelectButtonModule
+        SelectButtonModule,
+        PanelModule,
+        InputTextModule
     ],
     declarations: [CarrinhoItemComponent,
         CarrinhoFrameComponent,
-        CarrinhoComponent
+        CarrinhoComponent,
+        CompraRealizadaComponent
     ],
     entryComponents: [],
     providers: [CarrinhoFrameService, OrderService],

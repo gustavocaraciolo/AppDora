@@ -1,4 +1,4 @@
-<div class="col-xs-12 table-responsive" *ngIf="items.length > 0">
+<!--<div class="col-xs-12 table-responsive" *ngIf="items.length > 0">
 
   <table class="table table-striped">
     <thead>
@@ -28,4 +28,50 @@
 
     </tbody>
   </table>
+</div>-->
+<div *ngIf="items.length > 0">
+<table class="table table-striped cart-list add_bottom_30">
+    <thead>
+    <tr>
+        <th>
+            Produto
+        </th>
+        <th>
+            Quantidade
+        </th>
+        <th>
+            Desconto
+        </th>
+        <th>
+            Subtotal
+        </th>
+        <th>
+            Remover
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of items">
+        <td>
+            <span>{{item.produtoItem.nome}}</span>
+        </td>
+        <td>
+            <div class="numbers-row">
+                <a (click)="emitDecreaseQty(item)" class="btn btn-sm"><i class="fa fa-minus"></i></a>
+                {{item.quantity}}
+                <a (click)="emitIncreaseQty(item)" class="btn btn-sm"><i class="fa fa-plus"></i></a>
+            </div>
+        </td>
+        <td>
+            0%
+        </td>
+        <td>
+            <strong>{{item.value() | currency: 'BRL': true}}</strong>
+        </td>
+        <td class="options">
+            <a (click)="emitRemove(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </div>

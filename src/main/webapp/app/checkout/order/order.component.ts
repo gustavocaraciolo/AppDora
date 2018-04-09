@@ -15,7 +15,10 @@ import {FormaDePagamento} from "../../entities/checkout/checkout.model";
 
 @Component({
     selector: 'mt-order',
-    templateUrl: './order.component.html'
+    templateUrl: './order.component.html',
+    styleUrls: [
+        '../../../content/css/style.css'
+    ]
 })
 export class OrderComponent implements OnInit {
 

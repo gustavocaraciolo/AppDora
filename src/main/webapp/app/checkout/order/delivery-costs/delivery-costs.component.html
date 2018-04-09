@@ -1,11 +1,10 @@
-<div class="table-responsive">
-  <table class="table">
+ <table class="table table-striped options_cart">
     <tbody><tr>
       <th style="width:50%">Itens:</th>
       <td class="text-right">{{itemsValue | currency: 'BRL': true}}</td>
     </tr>
     <tr>
-      <th>Frete:</th>
+      <th>Desconto:</th>
       <td class="text-right">{{delivery | currency: 'BRL': true}}</td>
     </tr>
     <tr>
@@ -13,4 +12,4 @@
       <td class="text-right">{{total() | currency: 'BRL': true}}</td>
     </tr>
   </tbody></table>
-</div>
+
