@@ -25,6 +25,7 @@
     "fullcalendar": "3.8.2",
     "jquery": "3.2.1",
     "moment": "2.20.1",
+    "nebular": "^0.0.1",
     "ng-jhipster": "0.4.0",
     "ngx-cookie": "2.0.1",
     "ngx-infinite-scroll": "0.5.1",

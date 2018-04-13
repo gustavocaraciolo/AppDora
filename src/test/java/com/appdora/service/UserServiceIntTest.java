@@ -73,6 +73,7 @@ public class UserServiceIntTest {
     @Test
     @Transactional
     public void assertThatOnlyActivatedUserCanRequestPasswordReset() {
+        //teste
         user.setActivated(false);
         userRepository.saveAndFlush(user);
 

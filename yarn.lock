@@ -5473,6 +5473,10 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+nebular@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/nebular/-/nebular-0.0.1.tgz#6707a8bee5cbd11c2acb213077f5911e96f90c40"
+
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
