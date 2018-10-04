@@ -1,0 +1,52 @@
+{
+    "name": "Portal",
+    "fields": [
+        {
+            "fieldName": "descricao",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dataAtivacao",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "flagDefault",
+            "fieldType": "FlagSimNao",
+            "fieldValues": "SIM,NAO",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tipoIdioma",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "flagSenhaEncriptada",
+            "fieldType": "FlagSimNao",
+            "fieldValues": "SIM,NAO"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipValidateRules": "required",
+            "relationshipName": "utilizdor",
+            "otherEntityName": "utilizador",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "portal"
+        }
+    ],
+    "changelogDate": "20181004134933",
+    "entityTableName": "portal",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

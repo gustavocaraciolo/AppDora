@@ -1,0 +1,143 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-utilizador-heading" jhiTranslate="appDoraApp.utilizador.home.createOrEditLabel">Create or edit a Utilizador</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!utilizador.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="utilizador.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.primeiroNome" for="field_primeiroNome">Primeiro Nome</label>
+                    <input type="text" class="form-control" name="primeiroNome" id="field_primeiroNome"
+                        [(ngModel)]="utilizador.primeiroNome" required/>
+                    <div [hidden]="!(editForm.controls.primeiroNome?.dirty && editForm.controls.primeiroNome?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.primeiroNome?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.ultimoNome" for="field_ultimoNome">Ultimo Nome</label>
+                    <input type="text" class="form-control" name="ultimoNome" id="field_ultimoNome"
+                        [(ngModel)]="utilizador.ultimoNome" required/>
+                    <div [hidden]="!(editForm.controls.ultimoNome?.dirty && editForm.controls.ultimoNome?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.ultimoNome?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.genero" for="field_genero">Genero</label>
+                    <select class="form-control" name="genero" [(ngModel)]="utilizador.genero" id="field_genero"  required>
+                        <option value="MASCULINO">{{'appDoraApp.Genero.MASCULINO' | translate}}</option>
+                        <option value="FEMININO">{{'appDoraApp.Genero.FEMININO' | translate}}</option>
+                        <option value="OUTROS">{{'appDoraApp.Genero.OUTROS' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.genero?.dirty && editForm.controls.genero?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.genero?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="utilizador.email" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Email' }">
+                            This field should follow pattern for "Email".
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.telefone" for="field_telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="field_telefone"
+                        [(ngModel)]="utilizador.telefone" required/>
+                    <div [hidden]="!(editForm.controls.telefone?.dirty && editForm.controls.telefone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.telefone?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.enderecoLinha1" for="field_enderecoLinha1">Endereco Linha 1</label>
+                    <input type="text" class="form-control" name="enderecoLinha1" id="field_enderecoLinha1"
+                        [(ngModel)]="utilizador.enderecoLinha1" required/>
+                    <div [hidden]="!(editForm.controls.enderecoLinha1?.dirty && editForm.controls.enderecoLinha1?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.enderecoLinha1?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.enderecoLinha2" for="field_enderecoLinha2">Endereco Linha 2</label>
+                    <input type="text" class="form-control" name="enderecoLinha2" id="field_enderecoLinha2"
+                        [(ngModel)]="utilizador.enderecoLinha2" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.cidade" for="field_cidade">Cidade</label>
+                    <input type="text" class="form-control" name="cidade" id="field_cidade"
+                        [(ngModel)]="utilizador.cidade" required/>
+                    <div [hidden]="!(editForm.controls.cidade?.dirty && editForm.controls.cidade?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.cidade?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.pais" for="field_pais">Pais</label>
+                    <input type="text" class="form-control" name="pais" id="field_pais"
+                        [(ngModel)]="utilizador.pais" required/>
+                    <div [hidden]="!(editForm.controls.pais?.dirty && editForm.controls.pais?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pais?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="appDoraApp.utilizador.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="utilizador.user"  required>
+                        <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id === utilizador.user?.id ? utilizador.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.user?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="appDoraApp.utilizador.portal" for="field_portal">Portal</label>
+                    <select class="form-control" id="field_portal" multiple name="portal" [(ngModel)]="utilizador.portals">
+                        <option [ngValue]="getSelected(utilizador.portals, portalOption)" *ngFor="let portalOption of portals; trackBy: trackPortalById">{{portalOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

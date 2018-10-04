@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="noticia">
+            <h2><span jhiTranslate="appDoraApp.noticia.detail.title">Noticia</span> {{noticia.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="appDoraApp.noticia.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{noticia.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.noticia.dataInicio">Data Inicio</span></dt>
+                <dd>
+                    <span>{{noticia.dataInicio}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.noticia.dataFim">Data Fim</span></dt>
+                <dd>
+                    <span>{{noticia.dataFim}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.noticia.portal">Portal</span></dt>
+                <dd>
+                    <div *ngIf="noticia.portal">
+                        <a [routerLink]="['/portal', noticia.portal?.id, 'view']">{{noticia.portal?.descricao}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/noticia', noticia.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

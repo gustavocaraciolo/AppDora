@@ -99,6 +99,9 @@
                 "tag": "Tag",
                 "vendas": "Vendas",
                 "itensCheckout": "Itens Checkout",
+                "portal": "Portal",
+                "noticia": "Noticia",
+                "utilizador": "Utilizador",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

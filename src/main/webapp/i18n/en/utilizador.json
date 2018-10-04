@@ -1,0 +1,33 @@
+
+{
+    "appDoraApp": {
+        "utilizador" : {
+            "home": {
+                "title": "Utilizadors",
+                "createLabel": "Create a new Utilizador",
+                "createOrEditLabel": "Create or edit a Utilizador",
+                "search": "Search for Utilizador"
+            },
+            "created": "A new Utilizador is created with identifier {{ param }}",
+            "updated": "A Utilizador is updated with identifier {{ param }}",
+            "deleted": "A Utilizador is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Utilizador {{ id }}?"
+            },
+            "detail": {
+                "title": "Utilizador"
+            },
+            "primeiroNome": "Primeiro Nome",
+            "ultimoNome": "Ultimo Nome",
+            "genero": "Genero",
+            "email": "Email",
+            "telefone": "Telefone",
+            "enderecoLinha1": "Endereco Linha 1",
+            "enderecoLinha2": "Endereco Linha 2",
+            "cidade": "Cidade",
+            "pais": "Pais",
+            "user": "User",
+            "portal": "Portal"
+        }
+    }
+}

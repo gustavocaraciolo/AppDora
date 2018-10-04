@@ -1,0 +1,97 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="appDoraApp.utilizador.home.title">Utilizadors</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-utilizador" [routerLink]="['/utilizador/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="appDoraApp.utilizador.home.createLabel">
+            Create new Utilizador
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'appDoraApp.utilizador.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="utilizadors">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primeiroNome"><span jhiTranslate="appDoraApp.utilizador.primeiroNome">Primeiro Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ultimoNome"><span jhiTranslate="appDoraApp.utilizador.ultimoNome">Ultimo Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="genero"><span jhiTranslate="appDoraApp.utilizador.genero">Genero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="appDoraApp.utilizador.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefone"><span jhiTranslate="appDoraApp.utilizador.telefone">Telefone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enderecoLinha1"><span jhiTranslate="appDoraApp.utilizador.enderecoLinha1">Endereco Linha 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enderecoLinha2"><span jhiTranslate="appDoraApp.utilizador.enderecoLinha2">Endereco Linha 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cidade"><span jhiTranslate="appDoraApp.utilizador.cidade">Cidade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pais"><span jhiTranslate="appDoraApp.utilizador.pais">Pais</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="appDoraApp.utilizador.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let utilizador of utilizadors ;trackBy: trackId">
+                <td><a [routerLink]="['/utilizador', utilizador.id, 'view' ]">{{utilizador.id}}</a></td>
+                <td>{{utilizador.primeiroNome}}</td>
+                <td>{{utilizador.ultimoNome}}</td>
+                <td jhiTranslate="{{'appDoraApp.Genero.' + utilizador.genero}}">{{utilizador.genero}}</td>
+                <td>{{utilizador.email}}</td>
+                <td>{{utilizador.telefone}}</td>
+                <td>{{utilizador.enderecoLinha1}}</td>
+                <td>{{utilizador.enderecoLinha2}}</td>
+                <td>{{utilizador.cidade}}</td>
+                <td>{{utilizador.pais}}</td>
+                <td>
+                    {{utilizador.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/utilizador', utilizador.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/utilizador', utilizador.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'utilizador/'+ utilizador.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="utilizadors && utilizadors.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>
