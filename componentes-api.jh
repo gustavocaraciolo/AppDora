@@ -1,0 +1,45 @@
+entity Portal {
+    descricao String
+    dataAtivacao Instant
+    flagDefault FlagSimNao required
+    tipoIdioma String required
+    flagSenhaEncriptada FlagSimNao
+}
+
+entity Noticia {
+    descricao String required
+    dataInicio Instant required
+    dataFim Instant required
+}
+
+entity Utilizador {
+    primeiroNome String required
+    ultimoNome String required
+    genero Genero required
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    telefone String required
+    enderecoLinha1 String required
+    enderecoLinha2 String
+    cidade String required
+    pais String required
+}
+
+enum FlagSimNao {
+    SIM, NAO
+}
+
+enum Genero {
+    MASCULINO, FEMININO, OUTROS
+}
+
+relationship OneToOne {
+    Utilizador{user(login) required} to User
+    Noticia{portal(descricao) required} to Portal
+}
+
+relationship ManyToMany {
+   Utilizador{portal} to Portal{utilizdor(email) required}
+}
+
+service Portal, Utilizador, Noticia with serviceClass
+paginate Portal, Utilizador, Noticia with pagination

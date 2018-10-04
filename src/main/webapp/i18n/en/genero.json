@@ -1,0 +1,10 @@
+{
+    "appDoraApp": {
+        "Genero" : {
+            "null": "",
+            "MASCULINO": "MASCULINO",
+            "FEMININO": "FEMININO",
+            "OUTROS": "OUTROS"
+        }
+    }
+}

@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="utilizador">
+            <h2><span jhiTranslate="appDoraApp.utilizador.detail.title">Utilizador</span> {{utilizador.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="appDoraApp.utilizador.primeiroNome">Primeiro Nome</span></dt>
+                <dd>
+                    <span>{{utilizador.primeiroNome}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.ultimoNome">Ultimo Nome</span></dt>
+                <dd>
+                    <span>{{utilizador.ultimoNome}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.genero">Genero</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'appDoraApp.Genero.' + utilizador.genero}}">{{utilizador.genero}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.email">Email</span></dt>
+                <dd>
+                    <span>{{utilizador.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.telefone">Telefone</span></dt>
+                <dd>
+                    <span>{{utilizador.telefone}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.enderecoLinha1">Endereco Linha 1</span></dt>
+                <dd>
+                    <span>{{utilizador.enderecoLinha1}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.enderecoLinha2">Endereco Linha 2</span></dt>
+                <dd>
+                    <span>{{utilizador.enderecoLinha2}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.cidade">Cidade</span></dt>
+                <dd>
+                    <span>{{utilizador.cidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.pais">Pais</span></dt>
+                <dd>
+                    <span>{{utilizador.pais}}</span>
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.user">User</span></dt>
+                <dd>
+                    {{utilizador.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="appDoraApp.utilizador.portal">Portal</span></dt>
+                <dd>
+                    <span *ngFor="let portal of utilizador.portals; let last = last">
+                        <a [routerLink]="['/portal', portal?.id, 'view' ]">{{portal.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/utilizador', utilizador.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

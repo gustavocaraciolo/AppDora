@@ -57,6 +57,11 @@ public class CacheConfiguration {
             cm.createCache(com.appdora.domain.Produto.class.getName() + ".itensCheckouts", jcacheConfiguration);
             cm.createCache(com.appdora.domain.ItensCheckout.class.getName(), jcacheConfiguration);
             cm.createCache(com.appdora.domain.ItensCheckout.class.getName() + ".checkouts", jcacheConfiguration);
+            cm.createCache(com.appdora.domain.Portal.class.getName(), jcacheConfiguration);
+            cm.createCache(com.appdora.domain.Portal.class.getName() + ".utilizdors", jcacheConfiguration);
+            cm.createCache(com.appdora.domain.Noticia.class.getName(), jcacheConfiguration);
+            cm.createCache(com.appdora.domain.Utilizador.class.getName(), jcacheConfiguration);
+            cm.createCache(com.appdora.domain.Utilizador.class.getName() + ".portals", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

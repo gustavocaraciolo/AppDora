@@ -1,0 +1,9 @@
+{
+    "appDoraApp": {
+        "FlagSimNao" : {
+            "null": "",
+            "SIM": "SIM",
+            "NAO": "NAO"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+
+{
+    "appDoraApp": {
+        "noticia" : {
+            "home": {
+                "title": "Noticias",
+                "createLabel": "Criar novo Noticia",
+                "createOrEditLabel": "Criar ou editar Noticia",
+                "search": "Pesquisar por Noticia"
+            },
+            "created": "Um novo Noticia foi criado com o identificador {{ param }}",
+            "updated": "Um Noticia foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Noticia foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Noticia {{ id }}?"
+            },
+            "detail": {
+                "title": "Noticia"
+            },
+            "descricao": "Descricao",
+            "dataInicio": "Data Inicio",
+            "dataFim": "Data Fim",
+            "portal": "Portal"
+        }
+    }
+}

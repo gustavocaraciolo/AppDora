@@ -11,10 +11,15 @@
     <include file="config/liquibase/changelog/20180328124232_added_entity_Cliente.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180328124233_added_entity_Tag.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180404002447_added_entity_ItensCheckout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181004134933_added_entity_Portal.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181004134934_added_entity_Noticia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181004134935_added_entity_Utilizador.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180328124229_added_entity_constraints_Checkout.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180328124230_added_entity_constraints_Produto.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180328124232_added_entity_constraints_Cliente.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180404002447_added_entity_constraints_ItensCheckout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181004134934_added_entity_constraints_Noticia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181004134935_added_entity_constraints_Utilizador.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
